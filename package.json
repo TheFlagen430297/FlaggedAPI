@@ -1,0 +1,24 @@
+{
+  "name": "flaggedapi",
+  "version": "1.2.5",
+  "description": "An all around API for all things TheFlagen430297",
+  "main": "exports.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Anti-cuss",
+    "cussing",
+    "TheFlagen430297",
+    "Flagen",
+    "logging",
+    "logger",
+    "cool-logging"
+  ],
+  "author": "TheFlagen430297",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "request": "^2.88.2"
+  }
+}
