@@ -8,6 +8,10 @@
 <h1>What is FlaggedAPI? 🤷‍♂️</h1>
 <p><b>FlaggedAPI is a All-In-One API to connect to most of my services :D</b><br>It is a small API right now & only has an cuss checker and a logging system.<br>but it will receive updates whenever I can get around to it 😃</p>
 <br>
+<br><h2>Important Announcements!</h2>
+<br><p> • Between versions "1.0.0" - "1.2.5", I wasn't properly using the <a href="https://semver.org/" target="_blank">Semantic Versioning</a> system, from now on I will try my best to use this system. HOWEVER due to npm limitations, any updates to the metadata (Like the README.md), it will be counted as a PATCH update.</p>
+<br><p> • Updated the license and updated the type of license to FCL (Flagen's Commercial License) in the package.json</p>
+<br>
 <br>
 <br>
 <h1>About the 1.2.0 - 1.2.4 Update</h1>
@@ -16,7 +20,7 @@
 All functions should have tooltips? I guess you call them that? It's when you hover over a function in VSCode and it gives you information about it.\
 It includes a description, and code inside of it :D 100% Help in the function itself XD
 
-<h2>In 1.2.1</h2>• ACL was redone to be able to return the raw log string! This is big news because you can use ACL in NPM's that update the console like <a href="https://www.npmjs.com/package/log-update/v/4.0.0"; title="I highly recommend using 4.0.0, it's the best version XD"><i>npm i log-update</i></a>
+<h2>In 1.2.1</h2>• ACL was redone to be able to return the raw log string! This is big news because you can use ACL in NPM's that update the console like <a href="https://www.npmjs.com/package/log-update/v/4.0.0" title="I highly recommend using 4.0.0, it's the best version XD" target="_blank"><i>npm i log-update</i></a>
 <br>• <i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
 <br>
 <br>
@@ -132,7 +136,7 @@ log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color
 //It will log to the console.
 //In this case, all of these options are optional.
 
-log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
+log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex("#424742").bold(` (`) + chalk.hex("#047ffa").bold(`!`) + chalk.hex("#424742").bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
 //*It will return the raw chalk format for processing*
 //This is a string value that you will need to have processed, it will not log.
 //In this case, all of these options except returnRaw are optional.
@@ -142,7 +146,7 @@ log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
 //The Info color will be what you have set it in ACL.colors()
 //In this case, the color option is optional.
 
-log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex("#424742").bold.italic(` (`) + chalk.hex("#e3ca1c").bold.italic(`!`) + chalk.hex("#424742").bold.italic(`) `) + chalk.hex("#e3ca1c").italic.bold(`Info: `) + chalk.hex("#FF0000").italic(This is a test!)
 //*It will return the raw chalk format for processing*
 //In this case, the color option is optional, the rest are needed.
 ```
@@ -282,6 +286,19 @@ number();
 <details>
     <summary><p>1.2.4 -> 1.2.5 Changelog</p></summary>
     <br>• Updated LICENSE
+    <br>• Edited: README.md
+</details>
+<details>
+    <summary><p>1.2.5 -> 1.2.6 Changelog</p></summary>
+    <br>• Started Following the Semantic Versioning (To the best that I can)
+    <br>• Updated LICENSE
+    <br>• Updated package.json
+    <br>• Updated the README.md documentation
+    <br>• Edited: README.md
+</details>
+<details>
+    <summary><p>1.2.6 -> 1.2.7 Changelog</p></summary>
+    <br>• Updated package.json
     <br>• Edited: README.md
 </details>
 <br>

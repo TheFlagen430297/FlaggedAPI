@@ -1,7 +1,9 @@
 {
   "name": "flaggedapi",
-  "version": "1.2.5",
-  "description": "An all around API for all things TheFlagen430297",
+  "author": "TheFlagen430297",
+  "version": "1.2.7",
+  "description": "This is an Anti-cusser, a cool logging system and an all around API for all things TheFlagen430297",
+  "license": "FCL",
   "main": "exports.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,10 +17,13 @@
     "logger",
     "cool-logging"
   ],
-  "author": "TheFlagen430297",
-  "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",
     "request": "^2.88.2"
+  },
+  "homepage": "https://theflagen430297.com/API/FlaggedAPI/Home",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheFlagen430297/FlaggedAPI.git"
   }
 }
