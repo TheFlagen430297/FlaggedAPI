@@ -98,33 +98,41 @@ function ACDClear() {
  *      //Assign the Const with name ACL
  *      const ACL = FlaggedAPI.ACL;
  * 
- *      //Use the ACL.colors()
- *      ACL.colors();
+ *      //Use the ACL.Colors()
+ *      ACL.Colors();
  * ```
  * \
  * \
  * To set colors use this:
  * ```js
- *      ACL.colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`])
+ *      ACL.Colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`])
  * ```
  * Each color must be an array of both its official name and the 6-digit Hex color that you wish for it to be.  \
- * Run ***`ACL.colors();`*** to get all the color names
- * \
+ * Run ***`ACL.Colors();`*** to get all the color names
+ * 
+ * *List of color names:*
+ * - Main_Color
+ * - Secondary_Color
+ * - Tertiary_Color
+ * - Text_Color_Main
+ * - Text_Color_Debug
+ * - Success_Color
+ * - Info_Color
+ * - Warning_Color
+ * - Error_Color
+ * 
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
  */
-function colors(...options) {
+function Colors(...options) {
     if (options.length > 0) {
         options.forEach(x => {
             try {
                 if (x[0] === `ACDEnabled`) return;
                 Settings[x[0]].color = `${x[1]}`;
-                this.ACD(`Successfully added: ${chalk.hex(x[1])(x[0])} with the color of ${chalk.hex(x[1])(x[1])}`, `success`);
-            } catch (e) {
-                this.ACD(`Unknown Value: ${x[0]}`, `warning`);
-            }
+                ACD(`Successfully added: ${chalk.hex(x[1])(x[0])} with the color of ${chalk.hex(x[1])(x[1])}`, `success`);
+            } catch (e) { ACD(`Unknown Value: ${x[0]}`, `warning`); }
         });
-    } else print();
-    function print() {
+    } else {
         let entries = Object.entries(Settings);
         entries.forEach(x => {
             if (x[0] === `ACDEnabled`) return;
@@ -188,7 +196,7 @@ function colors(...options) {
  *      //In this case, the color option is optional, the rest are needed.
  * ```
  */
-function log(text, options) {
+function Log(text, options) {
     let Prefix = chalk.hex(Settings.Tertiary_Color.color).bold(` (`) + chalk.hex(Settings.Main_Color.color).bold(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold(`) `);
     if (!options && !text) return console.log();
     if (text && !options) return console.log(Prefix + chalk.hex(Settings.Text_Color_Main.color)(text));
@@ -249,4 +257,13 @@ function ErrorGen(text, boolean, color, returnRaw) {
         chalk.hex(Settings.Error_Color.color).italic.bold(`Error: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
-module.exports = { ACD, ACDClear, colors, log, ACDToggle };
+module.exports = {
+    //It is highly recommend to use the most recent function assignments
+    //the most recent function assignments
+    ACD, ACDClear, Colors, Log, ACDToggle,
+
+    //For everyone who hates to update their code, the old function assignments still work :D
+    //Legacy function assignments
+    log: Log,
+    colors: Colors
+};

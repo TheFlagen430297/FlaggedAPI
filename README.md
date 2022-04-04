@@ -14,21 +14,29 @@
 <br>
 <br>
 <br>
-<h1>About the 1.2.0 - 1.2.4 Update</h1>
+<h1>About the 1.2.0 - 1.2.8 Update</h1>
 <p>This update is big :D Getting and processing the cuss words are now totally better (And plans to make it ever better are coming). Also new and cool console logging was added (:
 
 All functions should have tooltips? I guess you call them that? It's when you hover over a function in VSCode and it gives you information about it.\
 It includes a description, and code inside of it :D 100% Help in the function itself XD
 
 <h2>In 1.2.1</h2>• ACL was redone to be able to return the raw log string! This is big news because you can use ACL in NPM's that update the console like <a href="https://www.npmjs.com/package/log-update/v/4.0.0" title="I highly recommend using 4.0.0, it's the best version XD" target="_blank"><i>npm i log-update</i></a>
-<br>• <i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
+<br>
 <br>
 <br>
 <h2>In 1.2.4</h2>• FlaggedAPI.cussCheck.request() was redone and changed from a callback to a Promise!
-<br>• <i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
+<br>
+<br>
+<br>
+<h2>In 1.2.8</h2>• FlaggedAPI.ACL.color() was renamed to FlaggedAPI.ACL.Color()
+<br> • FlaggedAPI.ACL.log() was renamed to FlaggedAPI.ACL.Log()
+<br> • FlaggedAPI.ACL.Color() had a ACD error, it has been fixed!
+<br> • Both Color() and Log() still work with color and log(), you do not have to update your code! It is only recommend to use Color() and Log(), but to each his own :D
+<br>
 <br>
 <br>
 <b>TAKE NOTE:</b> All other versions before 1.2.0 are not going to work because the API Links changes. The domain changed from https://theflagen430297.com to https://storage.theflagen430297.com</p>
+<br><i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
 <br>
 <br>
 <br>
@@ -78,10 +86,10 @@ const FlaggedAPI = require("flaggedapi");
 
 //Access to the cussCheck & ACL (Advanced Console Logging) branch and its components.
 //It's put into one line for space saving.
-let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
+let { ACDToggle, ACDClear, Log, ACD, Colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
 //Now all you have to use is:
 //• ACD();
-//• log();
+//• Log();
 //• ACDClear();
 
 
@@ -96,20 +104,20 @@ ACDToggle(true /*Default is: false*/);
 //It must be hard-coded and ran every time at startup.
 //However it can also be ran at any point in time to change the color.
 //It must follow this example: ([`Color_ID`, `Hex Value`], ["Main_Color", "#FF0000"]).
-colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
+Colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
 
 //Lists the current color settings.
-colors();
+Colors();
 ```
 <details>
     <summary><h2>No Notes Version</h2></summary>
 
 ```js
 const FlaggedAPI = require("flaggedapi");
-let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
+let { ACDToggle, ACDClear, Log, ACD, Colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
 ACDtoggle(true);
-colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
-colors();
+Colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
+Colors();
 ```
 </details>
 <br>
@@ -125,28 +133,28 @@ ACDClear();
 
 //Logs strings to the console!
 //This does not support Integers, Booleans, Objects, Arrays or anything else except String Values. (Support for these values are unknown, please request this addition at https://theflagen430297.com/RD#Join)
-log(); //=>*Nothing*
+Log(); //=>*Nothing*
 
-log(""); //=>*Nothing*
+Log(""); //=>*Nothing*
 
-log("Test"); //=> (!) Test
+Log("Test"); //=> (!) Test
 
-log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
+Log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
 //*It will be Bold, Italic, Underlined, and the text will be Red*
 //It will log to the console.
 //In this case, all of these options are optional.
 
-log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex("#424742").bold(` (`) + chalk.hex("#047ffa").bold(`!`) + chalk.hex("#424742").bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
+Log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex("#424742").bold(` (`) + chalk.hex("#047ffa").bold(`!`) + chalk.hex("#424742").bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
 //*It will return the raw chalk format for processing*
 //This is a string value that you will need to have processed, it will not log.
 //In this case, all of these options except returnRaw are optional.
 
-log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
+Log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
 //*The text will be Red, chat formatting like bolding isn't available*
 //The Info color will be what you have set it in ACL.colors()
 //In this case, the color option is optional.
 
-log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex("#424742").bold.italic(` (`) + chalk.hex("#e3ca1c").bold.italic(`!`) + chalk.hex("#424742").bold.italic(`) `) + chalk.hex("#e3ca1c").italic.bold(`Info: `) + chalk.hex("#FF0000").italic(This is a test!)
+Log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex("#424742").bold.italic(` (`) + chalk.hex("#e3ca1c").bold.italic(`!`) + chalk.hex("#424742").bold.italic(`) `) + chalk.hex("#e3ca1c").italic.bold(`Info: `) + chalk.hex("#FF0000").italic(This is a test!)
 //*It will return the raw chalk format for processing*
 //In this case, the color option is optional, the rest are needed.
 ```
@@ -155,13 +163,13 @@ log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex
 
 ```js
 ACDClear();
-log();
-log("");
-log("Test");
-log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000"});
-log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000"});
-log("Test", { color: "#FF0000", type: "info" }); 
-log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
+Log();
+Log("");
+Log("Test");
+Log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000"});
+Log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000"});
+Log("Test", { color: "#FF0000", type: "info" }); 
+Log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
 ```
 </details>
 <br>
@@ -299,6 +307,16 @@ number();
 <details>
     <summary><p>1.2.6 -> 1.2.7 Changelog</p></summary>
     <br>• Updated package.json
+    <br>• Edited: README.md
+</details>
+<details>
+    <summary><p>1.2.7 -> 1.2.8 Changelog</p></summary>
+    <br>• FlaggedAPI.ACL.color() was renamed to FlaggedAPI.ACL.Color()
+    <br>• FlaggedAPI.ACL.log() was renamed to FlaggedAPI.ACL.Log()
+    <br>• Fixed FlaggedAPI.ACL.Color() ACD error
+    <br>• Code Improvements
+    <br>• Updated package.json
+    <br>• Updated FlaggedAPI.ACL.Color() Documentation
     <br>• Edited: README.md
 </details>
 <br>
