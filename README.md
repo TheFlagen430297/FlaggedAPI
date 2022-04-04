@@ -28,10 +28,10 @@ It includes a description, and code inside of it :D 100% Help in the function it
 <br>
 <br>
 <br>
-<h2>In 1.2.8</h2>• FlaggedAPI.ACL.color() was renamed to FlaggedAPI.ACL.Color()
+<h2>In 1.2.8</h2>• FlaggedAPI.ACL.colors() was renamed to FlaggedAPI.ACL.Colors()
 <br> • FlaggedAPI.ACL.log() was renamed to FlaggedAPI.ACL.Log()
-<br> • FlaggedAPI.ACL.Color() had a ACD error, it has been fixed!
-<br> • Both Color() and Log() still work with color and log(), you do not have to update your code! It is only recommend to use Color() and Log(), but to each his own :D
+<br> • FlaggedAPI.ACL.Colors() had a ACD error, it has been fixed!
+<br> • Both Colors() and Log() still work with colors() and log(), you do not have to update your code! It is only recommend to use Colors() and Log(), but to each his own :D
 <br>
 <br>
 <br>
@@ -311,12 +311,16 @@ number();
 </details>
 <details>
     <summary><p>1.2.7 -> 1.2.8 Changelog</p></summary>
-    <br>• FlaggedAPI.ACL.color() was renamed to FlaggedAPI.ACL.Color()
+    <br>• FlaggedAPI.ACL.colors() was renamed to FlaggedAPI.ACL.Colors()
     <br>• FlaggedAPI.ACL.log() was renamed to FlaggedAPI.ACL.Log()
-    <br>• Fixed FlaggedAPI.ACL.Color() ACD error
+    <br>• Fixed FlaggedAPI.ACL.Colors() ACD error
     <br>• Code Improvements
     <br>• Updated package.json
-    <br>• Updated FlaggedAPI.ACL.Color() Documentation
+    <br>• Updated FlaggedAPI.ACL.Colors() Documentation
+    <br>• Edited: README.md
+</details>
+<details>
+    <summary><p>1.2.8 -> 1.2.9 Changelog</p></summary>
     <br>• Edited: README.md
 </details>
 <br>
