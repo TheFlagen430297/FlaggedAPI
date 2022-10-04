@@ -2,7 +2,8 @@ const ACL = require(`./ACL`), requestURL = require('request'), Package = require
 let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefined, b: undefined };
 
 /**
- * ***Cuss Request***  \
+ * ***Cuss Request***
+ * ### This is counted as OUTDATED! It may not work as intended.
  * Checks a string for words against the registered words in the Anti-cuss API
  *
  * @param {String} text
@@ -22,19 +23,28 @@ let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefin
  *
  * *Recommended* Example:
  * ```js
- * let CheckString = "The String you want to check";
+ * //Call the API
+ * const { request } = require("flaggedapi").cussCheck
+ *
+ * // Defined String that you want to check
+ * let CheckString = `The String you want to check lmao`;
+
+ * //Any words that you don't want flagged
  * let ignored_words_array = [`Words`, `You`, `Don't`, `Want`, `Checked`];
- * client.cussCheck(CheckString, { refresh: false, ignored_words_array }).then(ReturnedData => {
- *      console.log(ReturnedData); //Returns an Object with info.
- *      console.log(ReturnedData.hasCuss); //Returns Boolean.
- *      console.log(ReturnedData.cuss_list); //Returns all cuss words found.
+ *
+ * //Use the request()
+ * request(CheckString, { refresh: false, ignored_words_array }).then(ReturnedData => {
+ *     console.log(ReturnedData); //Returns an Object with info.
+ *     console.log(ReturnedData.hasCuss); //Returns Boolean.
+ *     console.log(ReturnedData.cuss_list); //Returns all cuss words found.
  * }).catch(err => {
- *      console.log(err.error)
+ *     console.log(err.error)// will log any errors
  * })
  * ```
  * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussRequest
  */
 function request(text, options) {
+    ACL.log(`FROM flaggedapi.cussCheck.request(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
     if (!options) { options = {} }
     return new Promise(function (resolve, reject) {
         Handler(() => {
@@ -80,15 +90,18 @@ function request(text, options) {
  * Use the returned method to get the array value\
  * Example:
  * ```js
- * FlaggedApi.cussCheck.list(true, returned => {
- * console.log(returned); //=> ["Bad", "words"]
+ * //Call the API
+ * const { list } = require("flaggedapi").cussCheck
+ * 
+ * 
+ * //Use the list()
+ * list(true, returned => {
+ *     console.log(returned); //=> ["Bad", "words"]
  * });
- * ```
- * \
- * Use without the returned method to get a message in the console\
- * Example:
- * ```
- * FlaggedApi.cussCheck.list(); //=> (!) ["Bad", "words"]
+ *     
+ * //Use without the returned method to get a message in the console
+ * //Example:
+ * list(); //=> (!) ["Bad", "words"]
  * ```
  * 
  * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussList
@@ -110,15 +123,18 @@ function list(Array, returned) {
  * Use the returned method to get the Integer value\
  * Example:
  * ```js
- * FlaggedApi.cussCheck.number(returned => {
+ * //Call the API
+ * const { number } = require("flaggedapi").cussCheck
+ * 
+ * 
+ * //Use the list()
+ * number(returned => {
  *     console.log(returned); //=> 183
  * });
- * ```
- * \
- * Use without the returned method to get a message in the console\
- * Example:
- * ```
- * FlaggedApi.cussCheck.number(); //=> There are 183 words in the database, if you would like to contribute and add more words you can summit your words at https://theflagen430297.com/RD#Join
+ *     
+ * //Use without the returned method to get a message in the console
+ * //Example:
+ * number(); //=> There are 183 words in the database, if you would like to contribute and add more words you can summit your words at https://theflagen430297.com/RD#Join
  * ```
  * 
  * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussNumber

@@ -22,7 +22,7 @@ let Settings = {
 }
 
 /**
- * ***ACD*** *Advanced Console Debugging* *ᵁᵖᵈᵃᵗᵉᵈ*  \
+ * ***ACD*** *Advanced Console Debugging*  \
  * It allows more decorative console log debugging.
  * @param {String} text **Whatever you want the message to display**
  * @param {`success`|`info`|`warning`|`error`| undefined} type **The type of message** 
@@ -36,12 +36,9 @@ let Settings = {
  * *Recommended Examples:*
  * ```js
  *      //Call the API
- *      const FlaggedAPI = require("flaggedapi");
+ *      const { ACD } = require("flaggedapi").ACL;
  * 
- *      //Assign the Const with name ACD
- *      const ACD = FlaggedAPI.ACL.ACD;
- * 
- *      //Use the ACD
+ *      //Use the ACD()
  *      ACD("Line 7 was ran"); //=> (!) Info: Line 7 was ran
  *      ACD("Line 8 was ran", "info"); //=> (!) Info: Line 8 was ran
  *      ACD("Line 9 was unsuccessful", "error"); //=> (!) Error: Line 9 was unsuccessful
@@ -67,18 +64,15 @@ function ACD(text, type) {
 
 /**
  * ***ACDClear***   \
- * Clears the console if ACDEnabled is False
+ * Clears the console if ACDToggle is False
  * 
  * *Recommended Examples:*
  * ```js 
  *      //Call the API
- *      const FlaggedAPI = require("flaggedapi");
+ *      const { clear } = require("flaggedapi").ACL;
  * 
- *      //Assign the Const with name Clear
- *      const Clear = FlaggedAPI.ACL.ACDClear;
- * 
- *      //Use the Clear()
- *      Clear();
+ *      //Use the clear()
+ *      clear();
  * ```
  */
 function ACDClear() {
@@ -86,29 +80,26 @@ function ACDClear() {
 }
 
 /**
- * ***ACL & ACD Colors***   \
+ * ***ACD Colors***   \
  * Change the colors of the console 😁
  * @param  {...any} options **To Use:**  \
  * If you use it without any input you will get the current colors of the console.  \
  * *Recommended Example:*
  * ```js
  *      //Call the API
- *      const FlaggedAPI = require("flaggedapi");
+ *      const { colors } = require("flaggedapi").ACL;
  * 
- *      //Assign the Const with name ACL
- *      const ACL = FlaggedAPI.ACL;
- * 
- *      //Use the ACL.Colors()
- *      ACL.Colors();
+ *      //Use the colors()
+ *      colors();
  * ```
  * \
  * \
  * To set colors use this:
  * ```js
- *      ACL.Colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`])
+ *      colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`])
  * ```
  * Each color must be an array of both its official name and the 6-digit Hex color that you wish for it to be.  \
- * Run ***`ACL.Colors();`*** to get all the color names
+ * Run ***`colors();`*** to get all the color names
  * 
  * *List of color names:*
  * - Main_Color
@@ -123,7 +114,7 @@ function ACDClear() {
  * 
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
  */
-function Colors(...options) {
+function colors(...options) {
     if (options.length > 0) {
         options.forEach(x => {
             try {
@@ -164,40 +155,51 @@ function Colors(...options) {
  * *Recommended Examples:*
  * ```js
  *      //Call the API
- *      const FlaggedAPI = require("flaggedapi");
+ *      const { log } = require("flaggedapi").ACL;
  * 
- *      //Assign a Const with name Log
- *      const Log = FlaggedAPI.ACL.log;
+ *      //Use the log()
+ *      log(); //=>*Nothing*
  * 
- *      //Use the Log()
- *      Log(); //=>*Nothing*
+ *      log(""); //=>*Nothing*
  * 
- *      Log(""); //=>*Nothing*
+ *      log("Test"); //=> (!) Test
  * 
- *      Log("Test"); //=> (!) Test
+ *      log("Logging with\nmore then\n\none line!"); //=>
+ *      //(!) Logging with
+ *      // ╠  more then
+ *      // ║  
+ *      // ╚  one line!
  * 
- *      Log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
+ *      log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
  *      //*It will be Bold, Italic, Underlined, and the text will be Red*
  *      //It will log to the console.
  *      //In this case, all of these options are optional.
  * 
- *      Log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
+ *      log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
  *      //*It will return the raw chalk format for processing*
  *      //This is a string value that you will need to have processed, it will not log.
  *      //In this case, all of these options except returnRaw are optional.
  * 
- *      Log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
+ *      log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
  *      //*The text will be Red, chat formatting like bolding isn't available*
  *      //The Info color will be what you have set it in ACL.colors()
  *      //In this case, the color option is optional.
  * 
- *      Log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+ *      log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
  *      //*It will return the raw chalk format for processing*
  *      //In this case, the color option is optional, the rest are needed.
  * ```
  */
-function Log(text, options) {
-    let Prefix = chalk.hex(Settings.Tertiary_Color.color).bold(` (`) + chalk.hex(Settings.Main_Color.color).bold(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold(`) `);
+function log(text, options) {
+    let Prefix = chalk.hex(Settings.Tertiary_Color.color).bold(`(`) + chalk.hex(Settings.Main_Color.color).bold(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold(`) `);
+    let parts = text.split(`\n`)
+    text = ""
+    parts.forEach((x, i) => {
+        if (i == 0 ) return text = x
+        if (i != (parts.length - 1)) if (!x) text = text + `\n ║  `
+            else text = text + `\n ╠  ` + x
+        else text = text + `\n ╚  ` + x
+    })
     if (!options && !text) return console.log();
     if (text && !options) return console.log(Prefix + chalk.hex(Settings.Text_Color_Main.color)(text));
     else {
@@ -209,61 +211,78 @@ function Log(text, options) {
             else ErrorGen(`Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.Info_Color.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(` (`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, true);
         } else {
             if (options.returnRaw === true) {
-                return `chalk.hex("${Settings.Tertiary_Color.color}").bold(" (") + chalk.hex("${Settings.Main_Color.color}").bold("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold(") ") + chalk.hex("${options.color ? options.color : Settings.Text_Color_Main.color}")${options.bold ? ".bold" : ""}${options.italic ? ".italic" : ""}${options.underline ? ".underline" : ""}("${text}")`;
+                return `chalk.hex("${Settings.Tertiary_Color.color}").bold("(") + chalk.hex("${Settings.Main_Color.color}").bold("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold(") ") + chalk.hex("${options.color ? options.color : Settings.Text_Color_Main.color}")${options.bold ? ".bold" : ""}${options.italic ? ".italic" : ""}${options.underline ? ".underline" : ""}("${text}")`;
             } else eval(`console.log(Prefix + chalk.hex("${options.color ? options.color : Settings.Text_Color_Main.color}")${options.bold ? ".bold" : ""}${options.italic ? ".italic" : ""}${options.underline ? ".underline" : ""}(text))`);
         }
     }
 }
 
 /**
- * ***ACD Toggle***   \
+ * ***ACD Toggle*** *ᵁᵖᵈᵃᵗᵉᵈ*  \
  * If set to True it will display the set message in the console.  \
+ * If not set it will toggle it's current state
  * **Default:** ***`false`***
- * @param {Boolean} input 
+ * @param {Boolean|Null} input 
  * \
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
+ * 
+ * *As of **1.3.0** the `input` is no longer needed to be defined, it will just toggle state.*
+ * 
+ * *Recommended Examples:*
+ * ```js
+ * //Call the API
+ * const { ACDToggle } = require("flaggedapi").ACL;
+ * 
+ * //Use the ACDToggle()
+ * ACDToggle();
+ * //*It will toggle it's state* (Such as if it is False, it will be toggled to True)
+ * 
+ * //Assign the desired value *(Must be Boolean)*
+ * ACDToggle(true);
+ * ```
  */
 function ACDToggle(input) {
-    if (typeof (input) != "boolean") return ErrorGen(`It must be either true or false, but got ->${input}<-`);
+    if (input == undefined) return Settings.ACDEnabled = !Settings.ACDEnabled
+    else if (typeof (input) != "boolean") return ErrorGen(`It must be either true or false, but got ->${input}<-`);
     else Settings.ACDEnabled = input;
 }
 
 
 function SuccessGen(text, boolean, color, returnRaw) {
-    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(" (") + chalk.hex("${boolean ? Settings.Success_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
+    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Success_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
     chalk.hex("${Settings.Success_Color.color}").italic.bold("Success: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
-    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(` (`) + chalk.hex(boolean ? Settings.Success_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
+    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Success_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Success_Color.color).italic.bold(`Success: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
 function InfoGen(text, boolean, color, returnRaw) {
-    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(" (") + chalk.hex("${boolean ? Settings.Info_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
+    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Info_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
     chalk.hex("${Settings.Info_Color.color}").italic.bold("Info: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
-    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(` (`) + chalk.hex(boolean ? Settings.Info_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
+    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Info_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Info_Color.color).italic.bold(`Info: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
 function WarningGen(text, boolean, color, returnRaw) {
-    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(" (") + chalk.hex("${boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
+    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
     chalk.hex("${Settings.Warning_Color.color}").italic.bold("Info: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
-    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(` (`) + chalk.hex(boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
+    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Warning_Color.color).italic.bold(`Warning: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
 function ErrorGen(text, boolean, color, returnRaw) {
-    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(" (") + chalk.hex("${boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
+    if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
     chalk.hex("${Settings.Error_Color.color}").italic.bold("Info: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
-    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(` (`) + chalk.hex(boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
+    else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Error_Color.color).italic.bold(`Error: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
 module.exports = {
     //It is highly recommend to use the most recent function assignments
     //the most recent function assignments
-    ACD, ACDClear, Colors, Log, ACDToggle,
+    ACD, ACDClear, colors, log, ACDToggle,
 
     //For everyone who hates to update their code, the old function assignments still work :D
     //Legacy function assignments
-    log: Log,
-    colors: Colors
+    Log: log,
+    Colors: colors 
 };
