@@ -264,14 +264,14 @@ function InfoGen(text, boolean, color, returnRaw) {
 
 function WarningGen(text, boolean, color, returnRaw) {
     if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
-    chalk.hex("${Settings.Warning_Color.color}").italic.bold("Info: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
+    chalk.hex("${Settings.Warning_Color.color}").italic.bold("Warning: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
     else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Warning_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Warning_Color.color).italic.bold(`Warning: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }
 
 function ErrorGen(text, boolean, color, returnRaw) {
     if (returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") +
-    chalk.hex("${Settings.Error_Color.color}").italic.bold("Info: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
+    chalk.hex("${Settings.Error_Color.color}").italic.bold("Error: ") + chalk.hex("${color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}").italic("${text}")`;
     else return console.log(chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(boolean ? Settings.Error_Color.color : Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) `) +
         chalk.hex(Settings.Error_Color.color).italic.bold(`Error: `) + chalk.hex(color ? color : boolean ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color).italic(text));
 }

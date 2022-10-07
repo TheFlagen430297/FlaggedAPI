@@ -174,9 +174,9 @@ log("");
 log("Test");
 log("Logging with\nmore then\n\none line!");
 log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000"});
-Log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000"});
-Log("Test", { color: "#FF0000", type: "info" }); 
-Log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
+log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000"});
+log("Test", { color: "#FF0000", type: "info" }); 
+log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
 ```
 </details>
 <br>
@@ -340,6 +340,13 @@ number();
     <br>• Updated src/cussCheck.js
     <br>• Updated package.json
     <br>• Edited: README.md (As always)
+</details>
+<details>
+    <summary><p>1.3.0 -> 1.3.1 Changelog</p></summary>
+    <br>• Fixed a bug where if you used log() with `returnRaw: ture` and `type: "error"` or `type: "warning"` it would say `(!) Info:` instead of `(!) Error:`
+    <br>• Updated src/ACL.js
+    <br>• Updated package.json
+    <br>• Edited: README.md
 </details>
 <br>
 <br>
