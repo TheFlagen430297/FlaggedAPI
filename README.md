@@ -348,6 +348,13 @@ number();
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
+<details>
+    <summary><p>1.3.1 -> 1.3.2 Changelog</p></summary>
+    <br>• Fixed a bug where if you used log() without any options it would throw an error
+    <br>• Updated src/ACL.js
+    <br>• Updated package.json
+    <br>• Edited: README.md
+</details>
 <br>
 <br>
 <br>

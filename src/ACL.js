@@ -192,6 +192,7 @@ function colors(...options) {
  */
 function log(text, options) {
     let Prefix = chalk.hex(Settings.Tertiary_Color.color).bold(`(`) + chalk.hex(Settings.Main_Color.color).bold(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold(`) `);
+    if (!options && !text) return console.log(``);
     let parts = text.split(`\n`)
     text = ""
     parts.forEach((x, i) => {
@@ -200,7 +201,6 @@ function log(text, options) {
             else text = text + `\n ╠  ` + x
         else text = text + `\n ╚  ` + x
     })
-    if (!options && !text) return console.log();
     if (text && !options) return console.log(Prefix + chalk.hex(Settings.Text_Color_Main.color)(text));
     else {
         if (options.type) {
