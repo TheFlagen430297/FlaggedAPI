@@ -17,20 +17,19 @@ It includes a description, and code inside of it :D 100% Help in the function it
 <br>
 <br>
 <br>
-<h1>1.3.0 Update</h1>
-<p>This update focuses on 2 things: the logging system and documentation!
-<br>Logging now supports multi-lined strings.</p>
+<h1>1.4.0 Update</h1>
+This update allows you to strip all colors from the logs!
+<br>
+<img src="https://i.imgur.com/Uqu9Gdf.png" alt="Picture of log colors">
+<br>This allows you to use FlaggedAPI on unsupported consoles :D
+<br>Use the "supported()" function:
 
 ```js
-    log("Logging with\nmore then\n\none line!"); //=>
-    //(!) Logging with
-    // ╠  more then
-    // ║  
-    // ╚  one line!
+const { supported } = require(`flaggedapi`).ACL
+supported()
 ```
-Now you can make your console look even better!
-<br>
-<br>All of the documentation was reviewed and redone for better clarity and smarter coding!
+
+This will tell the API to log the string without any colors!
 <br>
 <br>
 <br>
@@ -85,7 +84,7 @@ const FlaggedAPI = require("flaggedapi");
 
 //Access to the cussCheck & ACL (Advanced Console Logging) branch and its components.
 //It's put into one line for space saving.
-let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
+let { ACD, ACDClear, ACDToggle, colors, log, supported } = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
 //Now all you have to use is:
 //• ACD();
 //• log();
@@ -99,6 +98,12 @@ let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, r
 //REMEMBER THAT ACDToggle(true) MUST BE SET TO TRUE TO SEE THE MESSAGES!
 //as of 1.3.0 you no longer need to set a boolean in the function, it will toggle it's state.
 ACDToggle(/*Default is: false*/); //This will set it to True because it was False, if ran again, it will set it to False.
+
+//Allows you to toggle Supported Console.
+//If toggled True: You will see all log messages in color!
+//If toggled False: No coloring will be used!
+//MOST CONSOLES PROPERLY SUPPORT COLORS! Only use this option if you need too :)
+supported(/*Default is: true*/); //This will set it to False because it was True, if ran again, it will set it to True.
 
 //Allows you to set the colors for all of the ACL & ACD logging.
 //It must be hard-coded and ran every time at startup.
@@ -116,6 +121,7 @@ colors();
 const FlaggedAPI = require("flaggedapi");
 let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
 ACDtoggle();
+supported(); 
 colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
 colors();
 ```
@@ -355,7 +361,15 @@ number();
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
-<br>
+<details>
+    <summary><p>1.3.2 -> 1.4.0 Changelog</p></summary>
+    <br>• Added the ability to remove all colors from console messages (Mainly for unsupported consoles)
+    <br>• Added strip-ansi package
+    <br>• Updated some more in-package documentation
+    <br>• Updated src/ACL.js
+    <br>• Updated package.json
+    <br>• Edited: README.md
+</details>
 <br>
 <br>
 <br>
