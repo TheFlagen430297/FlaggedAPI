@@ -1,7 +1,7 @@
 <h1>FlaggedAPI</h1>
 <h1>Installation 💾</h1>
 <img src="https://minecraftskinstealer.com/achievement/2/npm+install+flaggedapi/Install+now%21">
-<br><a href="https://theflagen430297.com/RD#Join"><img class="aboutmeIMG" src="https://nodei.co/npm/flaggedapi.png?downloads=true&amp;downloadRank=true&amp;stars=true"></a>
+<br><a href="https://join.theflagen430297.com/discord"><img class="aboutmeIMG" src="https://nodei.co/npm/flaggedapi.png?downloads=true&amp;downloadRank=true&amp;stars=true"></a>
 <br>
 <br>
 <br>
@@ -17,23 +17,12 @@ It includes a description, and code inside of it :D 100% Help in the function it
 <br>
 <br>
 <br>
-<h1>1.4.0 Update</h1>
-This update allows you to strip all colors from the logs!
-<br>
-<img src="https://i.imgur.com/Uqu9Gdf.png" alt="Picture of log colors">
-<br>This allows you to use FlaggedAPI on unsupported consoles :D
-<br>Use the "supported()" function:
-
-```js
-const { supported } = require(`flaggedapi`).ACL
-supported()
-```
-
-This will tell the API to log the string without any colors!
+<h1>2.0.0 Update</h1>
+This update changed API Calls <i>(again)</i>, that's it... Major update, little change XD
 <br>
 <br>
 <br>
-<b>TAKE NOTE:</b> All other versions before 1.2.0 are not going to work because the API Links changes. The domain changed from https://theflagen430297.com to https://storage.theflagen430297.com</p>
+<b>TAKE NOTE:</b> All other versions before 2.0.0 are not going to work because the API Links changes. The domain changed from https://storage.theflagen430297.com to https://api.theflagen430297.com</p>
 <br><i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
 <br>
 <br>
@@ -370,13 +359,23 @@ number();
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
+<details>
+    <summary><p>1.4.0 -> 2.0.0 Changelog</p></summary>
+    <br>• Added .gitignore
+    <br>• Changed API links!
+    <br>• Updated some more in-package documentation
+    <br>• Updated src/cussCheck.js
+    <br>• Updated LICENSE
+    <br>• Updated package.json
+    <br>• Edited: README.md
+</details>
 <br>
 <br>
 <br>
 <h1>Support 🔧</h1>
 <p><b>I will give support over in my Discord server!</b>
 
-[**https://theflagen430297.com/RD#Join**](https://theflagen430297.com/RD#Join)</p>
-<a href="https://theflagen430297.com/RD#Join"><img src="https://discordapp.com/api/guilds/698186167350329476/embed.png?style=banner2"></a>
+[**https://join.theflagen430297.com/discord**](https://join.theflagen430297.com/discord)</p>
+<a href="https://join.theflagen430297.com/discord"><img src="https://discordapp.com/api/guilds/698186167350329476/embed.png?style=banner2"></a>
 <br>
 <br><h2>While I tried to make this version the best that it could be, it still is in a young state and may not work right or it may not be explained the right way, I am sorry in advanced if it is confusing XD If at anytime you need help PLEASE message me on discord and I will be happy to help! :D</h2>

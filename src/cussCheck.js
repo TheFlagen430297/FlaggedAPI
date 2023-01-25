@@ -41,7 +41,7 @@ let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefin
  *     console.log(err.error)// will log any errors
  * })
  * ```
- * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussRequest
+ * @see https://api.theflagen430297.com/flaggedAPI#CussRequest
  */
 function request(text, options) {
     ACL.log(`FROM flaggedapi.cussCheck.request(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
@@ -104,7 +104,7 @@ function request(text, options) {
  * list(); //=> (!) ["Bad", "words"]
  * ```
  * 
- * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussList
+ * @see https://api.theflagen430297.com/flaggedAPIHome#CussList
  */
 function list(Array, returned) {
     Handler(() => {
@@ -134,10 +134,10 @@ function list(Array, returned) {
  *     
  * //Use without the returned method to get a message in the console
  * //Example:
- * number(); //=> There are 183 words in the database, if you would like to contribute and add more words you can summit your words at https://theflagen430297.com/RD#Join
+ * number(); //=> There are 183 words in the database, if you would like to contribute and add more words you can summit your words at https://join.theflagen430297.com/discord
  * ```
  * 
- * @see https://theflagen430297.com/API/FlaggedAPI/Home#CussNumber
+ * @see https://api.theflagen430297.com/flaggedAPIHome#CussNumber
  */
 function number(returned) {
     let num = 0, array;
@@ -147,7 +147,7 @@ function number(returned) {
         array.forEach(x => { num++ }); i();
         function i() {
             if (num === array.length) {
-                if (!returned) return ACL.log(`There are ${num} words in the database, if you would like to contribute and add more words you can summit your words at https://theflagen430297.com/RD#Join`);
+                if (!returned) return ACL.log(`There are ${num} words in the database, if you would like to contribute and add more words you can summit your words at https://join.theflagen430297.com/discord`);
                 else return returned(num);
             } else setTimeout(() => { i() }, 50);
         };
@@ -155,11 +155,11 @@ function number(returned) {
 };
 function Handler(code) {
     let time = new Date();
-    requestURL.get('https://storage.theflagen430297.com/API/FlaggedAPI/Cussing/list.txt', function (e, r, b) {
+    requestURL.get('https://api.theflagen430297.com/flaggedAPI/src/cussing/list.txt', function (e, r, b) {
         HandleStorage.e = e; HandleStorage.r = r; HandleStorage.b = b;
-        if (!b && !r) return console.log(`Check your internet connection, if this keeps happening please report it at https://theflagen430297.com/RD#Join\n\nErrorCode:\n${e}`);
-        else if (!b && r) return Returned_Data(`A connection to the server was made but the server did not send any data, please report this at https://theflagen430297.com/RD#Join`);
-        else if (r.statusCode === 404) return ACL.log(`The resource that is required could not be found.\nReinstall the package and try again.\nIf that doesn't work please report it at https://theflagen430297.com/RD#Join\n\nPackage Version: ${Package.version}\nTime: ${time}\n`, true, `error`);
+        if (!b && !r) return console.log(`Check your internet connection, if this keeps happening please report it at https://join.theflagen430297.com/discord\n\nErrorCode:\n${e}`);
+        else if (!b && r) return Returned_Data(`A connection to the server was made but the server did not send any data, please report this at https://join.theflagen430297.com/discord`);
+        else if (r.statusCode === 404) return ACL.log(`The resource that is required could not be found.\nReinstall the package and try again.\nIf that doesn't work please report it at https://join.theflagen430297.com/discord\n\nPackage Version: ${Package.version}\nTime: ${time}\n`, true, `error`);
         else setTimeout(function () {
             try {
                 code()
