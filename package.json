@@ -4,7 +4,7 @@
   "version": "3.0.0",
   "description": "This is an Anti-cusser, a cool logging system and an all around API for all things TheFlagen430297",
   "license": "FCL",
-  "main": "exports.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
