@@ -1,4 +1,4 @@
-const ACL = require(`./ACL`), requestURL = require('request'), Package = require("../package.json");
+const ACL = require(`./ACL`), Package = require("../package.json");
 let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefined, b: undefined };
 
 /**
@@ -44,7 +44,7 @@ let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefin
  * @see https://api.theflagen430297.com/flaggedAPI#CussRequest
  */
 function request(text, options) {
-    ACL.log(`FROM flaggedapi.cussCheck.request(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
+    ACL.log(`FROM flaggedapi.request(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
     if (!options) { options = {} }
     return new Promise(function (resolve, reject) {
         Handler(() => {
@@ -107,6 +107,7 @@ function request(text, options) {
  * @see https://api.theflagen430297.com/flaggedAPIHome#CussList
  */
 function list(Array, returned) {
+    ACL.log(`FROM flaggedapi.list(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
     Handler(() => {
         let array = HandleStorage.b.replace(/\[|\]/g, "").replace(/\"/g, "").split(/,/g);
         if (!Array) return ACL.log(HandleStorage.b);
@@ -140,6 +141,7 @@ function list(Array, returned) {
  * @see https://api.theflagen430297.com/flaggedAPIHome#CussNumber
  */
 function number(returned) {
+    ACL.log(`FROM flaggedapi.number(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
     let num = 0, array;
     Handler(() => { getNumber(); });
     function getNumber() {
