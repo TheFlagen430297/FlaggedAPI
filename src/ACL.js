@@ -194,9 +194,10 @@ function log(text, options) {
     text = "";
     parts.forEach((x, i) => {
         if (i == 0) return text = x;
-        if (i != (parts.length - 1)) if (!x) text = text + `\n ║  `;
-        else text = text + `\n ╠  ` + x;
-        else text = text + `\n ╚  ` + x;
+        if (i != (parts.length - 1))
+            if (!x) text = text + `\n ║  `;
+            else text = text + `\n ╠═ ` + x;
+        else text = text + `\n ╚═ ` + x;
     });
     if (text && !options) return executeLog(false, Prefix, `chalk.hex("${Settings.Text_Color_Main.color}")(\`${text}\`)`);
     if (options.type) {
