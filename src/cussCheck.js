@@ -50,7 +50,7 @@
  */
 function check(searchString, options) {
     return new Promise((res, rej) => {
-        fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => {
+        fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/main/db/cussList.json`).then(response => response.json()).then(data => {
             let found_cuss = { number_of_words: 0, words: [] };
             searchString = searchString.toLowerCase();
             if (options && options.custom_words) options.custom_words.forEach((item, index, array) => { data.push({ cussword: item.toLowerCase(), level: 1, origin: `custom`}); });
