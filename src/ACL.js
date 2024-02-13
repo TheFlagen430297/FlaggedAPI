@@ -152,36 +152,35 @@ function colors(...options) {
  *      //Use the log()
  *      log(); //=>*Nothing*
  * 
- *      log(""); //=>*Nothing*
+ *      log(``); //=>*Nothing*
+ *      
+ *      log(` `); //=> (!) 
  * 
  *      log({ Some: `Object`}); //=> (!) { Some: `Object`}
  * 
- *      log("Test"); //=> (!) Test
+ *      log(`Test`); //=> (!) Test
  * 
- *      log("Logging with\nmore then\n\none line!"); //=>
+ *      log(`Logging with\nmore then\n\none line!`); //=>
  *      //(!) Logging with
- *      // ╠  more then
+ *      // ╠═ more then
  *      // ║  
- *      // ╚  one line!
+ *      // ╚═ one line!
  * 
- *      log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
+ *      log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
  *      //*It will be Bold, Italic, Underlined, and the text will be Red*
  *      //It will log to the console.
  *      //In this case, all of these options are optional.
  * 
- *      log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
+ *      log(`Test`, { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
  *      //*It will return the raw chalk format for processing*
  *      //This is a string value that you will need to have processed, it will not log.
- *      //In this case, all of these options except returnRaw are optional.
  * 
- *      log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
- *      //*The text will be Red, chat formatting like bolding isn't available*
- *      //The Info color will be what you have set it in ACL.colors()
- *      //In this case, the color option is optional.
+ *      log(`Test`, { color: "#FF0000", type: "info" }); //=> (!) Info: Test
+ *      //*The text will be Red, and it will append "Info:"*
+ *      //The Info color will be what you have set it in colors()
  * 
- *      log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+ *      log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
  *      //*It will return the raw chalk format for processing*
- *      //In this case, the color option is optional, the rest are needed.
  * ```
  * @returns {void|String} When used with option ***`returnRaw`*** set to `true` it will return a [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), else it will apply the passed options and log the given string to the console
  * @updated **`3.0.0`**
