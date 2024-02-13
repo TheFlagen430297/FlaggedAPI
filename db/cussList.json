@@ -1,3 +1,14 @@
-{
-  
-}
+[
+    {
+        "cussword": "fuck",
+        "language": "english",
+        "level": 1,
+        "reference": "https://en.wikipedia.org/wiki/Fuck"
+    },
+    {
+        "cussword": "shit",
+        "language": "english",
+        "level": 1,
+        "reference": "https://en.wikipedia.org/wiki/Shit"
+    }
+]
