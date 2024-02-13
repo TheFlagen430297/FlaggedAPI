@@ -8,7 +8,7 @@
  * const { check } = require("flaggedapi")
  *
  * // Defined String that you want to check
- * let CheckString = `Doesn't matter, frick you nerd, you peice of crap`;
+ * let CheckString = `Doesn't matter, frick you nerd, you piece of crap`;
 
  * //Any words that you don't want flagged
  * let ignored_words_array = [`Words`, `You`, `Don't`, `Want`, `Checked`, `Crap`];
@@ -58,13 +58,45 @@ function check(searchString, options) {
                 if (index == array.length - 1) res(found_cuss);
                 if (options && options.level < item.level) return;
                 if (options && options.ignored_words && options.ignored_words.find(x => x === item.cussword)) return;
-                if (searchString.includes(item.cussword)) {
-                    found_cuss.number_of_words++;
-                    found_cuss.words.push(item);
-                }
+                if (searchString.includes(item.cussword)) { found_cuss.number_of_words++; found_cuss.words.push(item); }
             });
         })
     });
 }
 
-module.exports = { check };
+/**
+ * ***Cuss List***  \
+ * returns all of the cuss words that are registered in the API
+ *
+ * *Recommended* Example:
+ * ```js
+ * //Call the API
+ * const { list } = require("flaggedapi")
+ *
+ * //Use list()
+ * list().then(data => {
+ *  console.log(data); //=>
+ *  //[
+ *  // { 
+ *  //   cussword: 'frick',
+ *  //   language: 'english',
+ *  //   level: 4,
+ *  //   reference: 'https://www.urbandictionary.com/define.php?term=Frick',
+ *  //   origin: 'api'
+ *  // },
+ *  // { 
+ *  //   cussword: 'badword',
+ *  //   language: 'english',
+ *  //   level: 4,
+ *  //   reference: 'https://www.someurl.com/',
+ *  //   origin: 'api'
+ *  // }]
+ * })
+ * ```
+ * 
+ * @returns {Array}
+ * @since **`3.0.0`**
+ */
+function list() { return new Promise((res, rej) => { fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => { res(data);}) }) }
+
+module.exports = { check, list };

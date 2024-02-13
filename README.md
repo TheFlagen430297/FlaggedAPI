@@ -1,46 +1,27 @@
 <h1>FlaggedAPI</h1>
 <h1>Installation 💾</h1>
 <img src="https://minecraftskinstealer.com/achievement/2/npm+install+flaggedapi/Install+now%21">
-<br><a href="https://join.theflagen430297.com/discord"><img class="aboutmeIMG" src="https://nodei.co/npm/flaggedapi.png?downloads=true&amp;downloadRank=true&amp;stars=true"></a>
+<br><a href="https://discord.gg/b9ax4KJ"><img class="aboutmeIMG" src="https://nodei.co/npm/flaggedapi.png?downloads=true&downloadRank=true&stars=true"></a>
 <br>
 <br>
 <br>
 <h1>What is FlaggedAPI? 🤷‍♂️</h1>
 <p><b>FlaggedAPI is a All-In-One API to connect to most of my services :D</b><br>It is a small API right now & only has an cuss checker and a logging system.<br>but it will receive updates whenever I can get around to it 😃
 <br>
-All functions should have tooltips? I guess you call them that? It's when you hover over a function in VSCode and it gives you information about it!
+All functions should have JSDoc! It's when you hover over a function in VSCode and it gives you information about it :D
 It includes a description, and code inside of it :D 100% Help in the function itself XD</p>
 <br>
 <br><h2>Important Announcements!</h2>
-<br><p> • Between versions "1.0.0" - "1.2.5", I wasn't properly using the <a href="https://semver.org/" target="_blank">Semantic Versioning</a> system, from now on I will try my best to use this system. HOWEVER due to npm limitations, any updates to the metadata (Like the README.md), it will be counted as a PATCH update.</p>
-<br><p> • Updated the license and updated the type of license to FCL (Flagen's Commercial License) in the package.json</p>
+<br><p>Major version 3.0.0 completely changes how the code works and how it is written! You will have to update your code.</p>
 <br>
 <br>
 <br>
-<h1>2.0.0 Update</h1>
-This update changed API Calls <i>(again)</i>, that's it... Major update, little change XD
+<h1>3.0.0 Update</h1>
+Holy Cow, I had no idea how to code back then XD
+<br>The code has been fixed, multiple features have been added, and should work as intended.
 <br>
 <br>
-<br>
-<b>TAKE NOTE:</b> All other versions before 2.0.0 are not going to work because the API Links changes. The domain changed from https://storage.theflagen430297.com to https://api.theflagen430297.com</p>
 <br><i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
-<br>
-<br>
-<br>
-<h1>A bit about me 📜</h1>
-<p>Hello there, I'm TheFlagen430297, I am:
-<br>
-• A Minecraft Server Owner
-<br>
-• a YouTuber
-<br>
-• a Christian
-<br>
-• a Republican
-<br>
-• a Discord Bot Coder
-<br>
-• And kinda messing around with Web Development XD</p>
 <br>
 <br>
 <br>
@@ -50,30 +31,19 @@ This update changed API Calls <i>(again)</i>, that's it... Major update, little 
 ```js
 //This is the demo code, it has a lot of possibilities. 🤣
 
-
-//Keys and Info:
-//Some helpful information about this document and the API
-
-//How to read this README:
-//• If there are 2 new lines it's a new Group.
-//• If there is 1 new line it is a new Section in the Group.
-
-//Most, if not all functions/values have the Markdown examples in VSCode. To see it do this:
+//Most, if not all functions/values have the JSDoc in VSCode. To see it do this:
 //• Call the API: const FlaggedAPI = require("flaggedapi");
-//• Use the logger (Or any function really): FlaggedAPI.ACL.log()
+//• Use the logger (Or any function really): FlaggedAPI.log()
 //• Hover over the .log() part!
-//It should display detailed help 😁 If however it does not display correctly or you still need help, go to https://theflagen430297.com/RD#Join and join the Discord server!
+//It should display detailed help 😁 If however it does not display correctly or you still need help, go to https://discord.gg/b9ax4KJ and join the Discord server!
 
 
 //Normal Operations:
 //These are used to call and create the shortcut calls of the API.
 
 //Calling the API.
-const FlaggedAPI = require("flaggedapi");
+const { ACD, ACDClear, ACDToggle, chalk, check, clear, colors, list, log, supported } = require("flaggedapi");
 
-//Access to the cussCheck & ACL (Advanced Console Logging) branch and its components.
-//It's put into one line for space saving.
-let { ACD, ACDClear, ACDToggle, colors, log, supported } = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
 //Now all you have to use is:
 //• ACD();
 //• log();
@@ -83,7 +53,7 @@ let { ACD, ACDClear, ACDToggle, colors, log, supported } = FlaggedAPI.ACL, { lis
 //Always need set:
 
 //Allows you to toggle ACD (Advanced Console Debugging).
-//If toggled True: You will see ACD messages and FlaggedAPI.ACL.ACDClear() will not run
+//If toggled True: You will see ACD messages and ACDClear() will not run
 //REMEMBER THAT ACDToggle(true) MUST BE SET TO TRUE TO SEE THE MESSAGES!
 //as of 1.3.0 you no longer need to set a boolean in the function, it will toggle it's state.
 ACDToggle(/*Default is: false*/); //This will set it to True because it was False, if ran again, it will set it to False.
@@ -97,8 +67,8 @@ supported(/*Default is: true*/); //This will set it to False because it was True
 //Allows you to set the colors for all of the ACL & ACD logging.
 //It must be hard-coded and ran every time at startup.
 //However it can also be ran at any point in time to change the color.
-//It must follow this example: ([`Color_ID`, `Hex Value`], ["Main_Color", "#FF0000"]).
-colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
+//It must follow this example: ([`Color_ID`, `Hex Value`], [`Main_Color`, `#FF0000`]).
+colors([`Text_Color_Debug`, `#F0e0a0`], [`Main_Color`, `#FF0000`], [`Text_Color_Main`, `#F0e0a0`]);
 
 //Lists the current color settings.
 colors();
@@ -107,11 +77,10 @@ colors();
     <summary><h2>No Notes Version</h2></summary>
 
 ```js
-const FlaggedAPI = require("flaggedapi");
-let { ACDToggle, ACDClear, log, ACD, colors} = FlaggedAPI.ACL, { list, number, request } = FlaggedAPI.cussCheck
-ACDtoggle();
+const { ACD, ACDClear, ACDToggle, chalk, check, clear, colors, list, log, supported } = require("flaggedapi");
+ACDToggle();
 supported(); 
-colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`]);
+colors([`Text_Color_Debug`, `#F0e0a0`], [`Main_Color`, `#FF0000`], [`Text_Color_Main`, `#F0e0a0`]);
 colors();
 ```
 </details>
@@ -127,37 +96,40 @@ colors();
 ACDClear();
 
 //Logs strings to the console!
-//This does not support Integers, Booleans, Objects, Arrays or anything else except String Values. (Support for these values are unknown, please request this addition at https://theflagen430297.com/RD#Join)
+//Now supports Integers, Booleans, Objects, Arrays or anything else!
+ 
+//Use the log()
 log(); //=>*Nothing*
+ 
+log(``); //=>*Nothing*
+      
+log(` `); //=> (!) 
 
-log(""); //=>*Nothing*
+log(`Test`); //=> (!) Test
+ 
+log({ Some: `Object`}); //=> (!) { Some: `Object`}
 
-log("Test"); //=> (!) Test
-
-log("Logging with\nmore then\n\none line!"); //=>
+log(`Logging with\nmore then\n\none line!`); //=>
 //(!) Logging with
-// ╠  more then
+// ╠═ more then
 // ║  
-// ╚  one line!
+// ╚═ one line!
 
-log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
+log(`Test`, { color: "#FF0000", type: "info" }); //=> (!) Info: Test
+//*The text will be Red, and it will append "Info:"*
+//The Info color will be what you have set it in colors()
+
+log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+//*It will return the raw chalk format for processing*
+
+log(`Test`, { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
+//*It will return the raw chalk format for processing*
+//This is a string value that you will need to have processed, it will not log.
+
+log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> (!) Test
 //*It will be Bold, Italic, Underlined, and the text will be Red*
 //It will log to the console.
 //In this case, all of these options are optional.
-
-log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex("#424742").bold(` (`) + chalk.hex("#047ffa").bold(`!`) + chalk.hex("#424742").bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
-//*It will return the raw chalk format for processing*
-//This is a string value that you will need to have processed, it will not log.
-//In this case, all of these options except returnRaw are optional.
-
-log("Test", { color: "#FF0000", type: "info" }); //=> (!) Info: Test
-//*The text will be Red, chat formatting like bolding isn't available*
-//The Info color will be what you have set it in ACL.colors()
-//In this case, the color option is optional.
-
-log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex("#424742").bold.italic(` (`) + chalk.hex("#e3ca1c").bold.italic(`!`) + chalk.hex("#424742").bold.italic(`) `) + chalk.hex("#e3ca1c").italic.bold(`Info: `) + chalk.hex("#FF0000").italic(This is a test!)
-//*It will return the raw chalk format for processing*
-//In this case, the color option is optional, the rest are needed.
 ```
 <details>
     <summary><h2>No Notes Version</h2></summary>
@@ -165,13 +137,15 @@ log("Test", { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex
 ```js
 ACDClear();
 log();
-log("");
-log("Test");
-log("Logging with\nmore then\n\none line!");
-log("Test", { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000"});
-log("Test", { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000"});
-log("Test", { color: "#FF0000", type: "info" }); 
-log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
+log(``);
+log(` `);
+log(`Test`);
+log({ Some: `Object`});
+log(`Logging with\nmore then\n\none line!`);
+log(`Test`, { color: "#FF0000", type: "info" });
+log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" });
+log(`Test`, { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" });
+log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" });
 ```
 </details>
 <br>
@@ -184,14 +158,14 @@ log("Test", { returnRaw: true, color: "#FF0000", type: "info"});
 
 //Logs to the console!
 
-//The "info" part can be one of four values: "success", "info", "warning", "error"
-ACD("You are reading the README.md help file!", "info");//=> (!) Info You are reading the README.md help file!
+//The "success" part can be one of four values: "success", "info", "warning", "error"
+ACD("You are reading the README.md help file!", "success");//=> (!) Success: You are reading the README.md help file!
 ```
 <details>
     <summary><h2>No Notes Version</h2></summary>
 
 ```js
-ACD("You are reading the README.md help file!", "info");
+ACD("You are reading the README.md help file!", "success");
 ```
 </details>
 <br>
@@ -201,28 +175,29 @@ ACD("You are reading the README.md help file!", "info");
 
 ```js
 //Cuss Checking
-request("String that has some cusswords in it", { refresh: false, ignored_words: [`Words`, `You`, `Don't`, `Want`, `Checked`] }).then(ReturnedData => {
-    console.log(ReturnedData); //Returns an Object with info.
-    console.log(ReturnedData.hasCuss); //Returns Boolean.
-    console.log(ReturnedData.cuss_list); //Returns all cuss words found.
-}).catch(err => { console.log(err.error);})
-
-
-//Gives you a list of all the cuss words. (This is just for you to view the words in it's Array format. Use the method below to get the actual Array for processing)
-list();
-
-//Returns the Array of words.
-list(true, x => {
-    console.log(x);
+ 
+//Use check()
+check(`Doesn't matter, frick you nerd, you piece of crap`, { custom_words: [`nerd`], ignored_words: [`Words`, `You`, `Don't`, `Want`, `Checked`, `Crap`], level: 4 }).then(data => {
+  console.log(data); //=>
+  //{
+  //    number_of_words: 2,
+  //    words: [
+  //      {
+  //        cussword: 'frick',
+  //        language: 'english',
+  //        level: 4,
+  //        reference: 'https://www.urbandictionary.com/define.php?term=Frick',
+  //        origin: 'api'
+  //      },
+  //      { cussword: 'nerd', level: 1, origin: 'custom' }
+  //    ]
+  //}
 })
 
-//Returns a Integer
-number(returned => {
-    console.log(returned);
-});
-
-//Returns a message that contains the number of words
-number();
+//Gives you a list of all the cuss words. (This is just for you to view the words in it's Array format. Use the method below to get the actual Array for processing)
+list().then(data => {
+    console.log(data)
+})
 ```
 <br>
 <br>
@@ -369,13 +344,32 @@ number();
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
+<details>
+    <summary><p>2.0.0 -> 3.0.0 Changelog</p></summary>
+    <br>• Edited .gitignore
+    <br>• Added .npmignore
+    <br>• Changed API links to github
+    <br>• Revamped Documentation
+    <br>• Revamped Code
+    <br>• Changed how imports are done. No more flaggedapi.ACL.log, it is now just flaggedapi.log
+    <br>• Updated src/cussCheck.js
+    <br>• Removed flaggedapi.cussCheck.number
+    <br>• Removed flaggedapi.cussCheck.request
+    <br>• Added flaggedapi.check (same as flaggedapi.cussCheck.request)
+    <br>• Added flaggedapi.chalk (So that you have access to the correct version)
+    <br>• Updated src/ACL.js
+    <br>• log(); now supports more than just strings
+    <br>• Updated LICENSE
+    <br>• Updated package.json
+    <br>• Updated package-lock.json
+    <br>• Removed "request" package
+    <br>• Edited README.md
+</details>
 <br>
 <br>
 <br>
 <h1>Support 🔧</h1>
-<p><b>I will give support over in my Discord server!</b>
-
-[**https://join.theflagen430297.com/discord**](https://join.theflagen430297.com/discord)</p>
-<a href="https://join.theflagen430297.com/discord"><img src="https://discordapp.com/api/guilds/698186167350329476/embed.png?style=banner2"></a>
+<p><b>I will give support over in my <a href="https://discord.gg/b9ax4KJ">Discord Server</a></b></p>
+<a href="https://discord.gg/b9ax4KJ"><img src="https://discordapp.com/api/guilds/698186167350329476/embed.png?style=banner2"></a>
 <br>
 <br><h2>While I tried to make this version the best that it could be, it still is in a young state and may not work right or it may not be explained the right way, I am sorry in advanced if it is confusing XD If at anytime you need help PLEASE message me on discord and I will be happy to help! :D</h2>

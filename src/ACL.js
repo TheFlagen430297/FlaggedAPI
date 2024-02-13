@@ -73,10 +73,9 @@ function ACD(text, type) {
 function ACDClear() { if (!Settings.ACDEnabled) console.clear(); }
 
 /**
- * ***ACD Colors***   \
+ * ***Colors***   \
  * Change the colors of the console 😁
- * @param  {...any} options **To Use:**  \
- * If you use it without any input you will get the current colors of the console.  \
+ * 
  * *Recommended Example:*
  * ```js
  *      //Call the API
@@ -92,7 +91,7 @@ function ACDClear() { if (!Settings.ACDEnabled) console.clear(); }
  *      colors([`Text_Color_Debug`, `#F0e0a0`], ["Main_Color", "#FF0000"], [`Text_Color_Main`, `#F0e0a0`])
  * ```
  * Each color must be an array of both its official name and the 6-digit Hex color that you wish for it to be.  \
- * Run ***`colors();`*** to get all the color names
+ * Run ***`colors();`*** to get all the color names and current settintgs
  * 
  * *List of color names:*
  * - Main_Color
@@ -106,6 +105,8 @@ function ACDClear() { if (!Settings.ACDEnabled) console.clear(); }
  * - error
  * 
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
+ * @param  {...any} options **For each array it need to look like this:** `["Text_Color_Debug", "#F0e0a0"]`
+ * @updated **`3.0.0`**
  */
 function colors(...options) {
     if (options.length > 0) {
@@ -126,23 +127,8 @@ function colors(...options) {
 }
 
 /**
- * ***Log*** *ᵘᵖᵈᵃᵗᵉᵈ*  \
- * More cooler looking logging with better features 😄
- * 
- * @param {*?} [text] Whatever you want to print to the console.
- * @param {Object} [options] You can add options to the log to make it look different :)
- * @param {Boolean} [options.returnRaw] *ₒₚₜᵢₒₙₐₗ* ***`returnRaw`***  \
- * If true, it will return the raw [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), useful for NPM's that update the console like [*npm i log-update*](https://www.npmjs.com/package/log-update/v/4.0.0 "I highly recommend using 4.0.0, it's the best version XD"). 
- * @param {Boolean} [options.bold] *ₒₚₜᵢₒₙₐₗ* ***`bold`***  \
- * Whether or not to bold the message.
- * @param {Boolean} [options.italic] *ₒₚₜᵢₒₙₐₗ* ***`italic`***  \
- * Whether or not to italic the message. 
- * @param {Boolean} [options.underline] *ₒₚₜᵢₒₙₐₗ* ***`underline`***  \
- * Whether or not to underline the message.
- * @param {String} [options.color] *ₒₚₜᵢₒₙₐₗ* ***`color`***  \
- * A 6-digit Hex string along with the # "***`#FFFFFF`***". It changes the color of the text.
- * @param {"success"|"info"|"warning"|"error"} [options.type] *ₒₚₜᵢₒₙₐₗ* ***`type`***  \
- * The type of message that you want to use. 
+ * ***Log***  \
+ * More cooler looking logging with better features 😄 
  * 
  * *Recommended Examples:*
  * ```js
@@ -156,9 +142,9 @@ function colors(...options) {
  *      
  *      log(` `); //=> (!) 
  * 
- *      log({ Some: `Object`}); //=> (!) { Some: `Object`}
- * 
  *      log(`Test`); //=> (!) Test
+ * 
+ *      log({ Some: `Object`}); //=> (!) { Some: `Object`}
  * 
  *      log(`Logging with\nmore then\n\none line!`); //=>
  *      //(!) Logging with
@@ -182,6 +168,20 @@ function colors(...options) {
  *      log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
  *      //*It will return the raw chalk format for processing*
  * ```
+ * 
+ * @param {Object} [options] You can add options to the log to make it look different :)
+ * @param {Boolean} [options.returnRaw] *ₒₚₜᵢₒₙₐₗ* ***`returnRaw`***  \
+ * If true, it will return the raw [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), useful for NPM's that update the console like [*npm i log-update*](https://www.npmjs.com/package/log-update/v/4.0.0 "I highly recommend using 4.0.0, it's the best version XD"). 
+ * @param {Boolean} [options.bold] *ₒₚₜᵢₒₙₐₗ* ***`bold`***  \
+ * Whether or not to bold the message.
+ * @param {Boolean} [options.italic] *ₒₚₜᵢₒₙₐₗ* ***`italic`***  \
+ * Whether or not to italic the message. 
+ * @param {Boolean} [options.underline] *ₒₚₜᵢₒₙₐₗ* ***`underline`***  \
+ * Whether or not to underline the message.
+ * @param {String} [options.color] *ₒₚₜᵢₒₙₐₗ* ***`color`***  \
+ * A 6-digit Hex string along with the # "***`#FFFFFF`***". It changes the color of the text.
+ * @param {"success"|"info"|"warning"|"error"} [options.type] *ₒₚₜᵢₒₙₐₗ* ***`type`***  \
+ * The type of message that you want to use.
  * @returns {void|String} When used with option ***`returnRaw`*** set to `true` it will return a [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), else it will apply the passed options and log the given string to the console
  * @updated **`3.0.0`**
  */
@@ -209,7 +209,7 @@ function log(text, options) {
 }
 
 /**
- * ***ACD Toggle*** *ᵁᵖᵈᵃᵗᵉᵈ*  \
+ * ***ACD Toggle***  \
  * If set to True it will display the set message in the console.  \
  * If not set it will toggle it's current state  \
  * **Default:** ***`false`***
@@ -232,19 +232,19 @@ function log(text, options) {
  * ACDToggle(true);
  * ```
  * @returns {void|throw} returns nothing, logs error
+ * @updated **`3.0.0`**
  */
 function ACDToggle(boolean) {
-    if (boolean == undefined) return Settings.ACDEnabled = !Settings.ACDEnabled;
-    else if (typeof (boolean) != "boolean") return ErrorGen(`It must be either true or false, but got ->${boolean}<-`);
+    if (!boolean) return Settings.ACDEnabled = !Settings.ACDEnabled;
+    else if (typeof(boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false)
     else Settings.ACDEnabled = boolean;
 }
 
 /**
- * ***Supported Console*** *ᴺᵉʷ*  \
+ * ***Supported Console*** \
  * If set to False it will strip all ASCI color codes and log it  \
  * If not set it will toggle it's current state  \
  * **Default:** ***`true`***
- * @param {Boolean|Null} boolean
  * 
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
  * 
@@ -260,11 +260,13 @@ function ACDToggle(boolean) {
  * //Assign the desired value *(Must be Boolean)*
  * supported(true);
  * ```
+ * @param {Boolean|Null} boolean
  * @returns {void|throw} returns nothing, logs error
+ * @updated **`3.0.0`**
  */
 function supported(boolean) {
-    if (boolean == undefined) return Settings.Supported_Console = !Settings.Supported_Console;
-    else if (typeof (boolean) != "boolean") return ErrorGen(`It must be either true or false, but got ->${boolean}<-`);
+    if (!boolean) return Settings.Supported_Console = !Settings.Supported_Console;
+    else if (typeof (boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false)
     else Settings.Supported_Console = boolean;
 }
 
