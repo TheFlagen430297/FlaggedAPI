@@ -1,172 +1,102 @@
-const ACL = require(`./ACL`), requestURL = require('request'), Package = require("../package.json");
-let env = { preload_cussList: null }, HandleStorage = { e: undefined, r: undefined, b: undefined };
-
 /**
- * ***Cuss Request***
- * ### This is counted as OUTDATED! It may not work as intended.
+ * ***Cuss Check***  \
  * Checks a string for words against the registered words in the Anti-cuss API
- *
- * @param {String} text
- * **The String that you want to check for a cuss word**
- *
- * @param {{refresh: Boolean, ignored_words: Array}} options
- * **The options that you would like to use**
- *
- * > • ***`refresh`***
- * **Whether to fetch the cuss list from the API**
- * `refresh: true` **or to use the cache** `refresh: false`.  
- * *In most cases, the Cuss List does not need to be refreshed after first run, if you wish to save resources on both ends you can set this to false* 😄
- *
- * > • ***`ignored_words`***
- * **An array of words that you do not want the API to flag as a cuss word**  
- * *In future updates I might make it to where cuss words have levels of severity, which will allow you to pick from a set list. like LMAO is lvl:1 while F### will be lvl:3 or something like that. This will alow more control over what you want and don't want caught by the API*
  *
  * *Recommended* Example:
  * ```js
  * //Call the API
- * const { request } = require("flaggedapi").cussCheck
+ * const { check } = require("flaggedapi")
  *
  * // Defined String that you want to check
- * let CheckString = `The String you want to check lmao`;
+ * let CheckString = `Doesn't matter, frick you nerd, you piece of crap`;
 
  * //Any words that you don't want flagged
- * let ignored_words_array = [`Words`, `You`, `Don't`, `Want`, `Checked`];
+ * let ignored_words_array = [`Words`, `You`, `Don't`, `Want`, `Checked`, `Crap`];
+ * 
+ * //Words that you do what flagged by the api that are not added to the main list
+ * let custom_words: [`nerd`]
  *
- * //Use the request()
- * request(CheckString, { refresh: false, ignored_words_array }).then(ReturnedData => {
- *     console.log(ReturnedData); //Returns an Object with info.
- *     console.log(ReturnedData.hasCuss); //Returns Boolean.
- *     console.log(ReturnedData.cuss_list); //Returns all cuss words found.
- * }).catch(err => {
- *     console.log(err.error)// will log any errors
+ * //Use check()
+ * check(CheckString, { custom_words: custom_words, ignored_words: ignored_words_array, level: 4 }).then(data => {
+ *   console.log(data); //=>
+ *   //{
+ *   //    number_of_words: 2,
+ *   //    words: [
+ *   //      {
+ *   //        cussword: 'frick',
+ *   //        language: 'english',
+ *   //        level: 4,
+ *   //        reference: 'https://www.urbandictionary.com/define.php?term=Frick',
+ *   //        origin: 'api'
+ *   //      },
+ *   //      { cussword: 'nerd', level: 1, origin: 'custom' }
+ *   //    ]
+ *   //}
  * })
  * ```
- * @see https://api.theflagen430297.com/flaggedAPI#CussRequest
+ * 
+ * @param {String} searchString **The string that you want to check for cuss words.**
+ * @param {Object} [options] **The options that you want to use while checking.**
+ * @param {Array} [options.ignored_words] **Words that you don't want flagged by the API**
+ * @param {Number} [options.level] **A numeral value that determines what type of words are caught, starting at 1.**  \
+ * The lower the value, the more servre the word is.  \
+ * Let's say that *"nerd"* is very offensive, so it's `level: 1`.  \
+ * And *"non"* is not that offensive, but is still somewhat bad, so we set the value to `level: 3`.  \
+ * If the `searchString` value is `"Hey nerd, your a non!"` with `options.level: 2`, *"nerd"* will be caught but *"non"* will not be.
+ * @param {Array} [options.custom_words] **Words that you want flagged by the API**.  \
+ * Words that are added here will be included into the cuss list, all words are marked as `level: 1` to have it catch them
+ * @returns {Object}
+ * @since **`3.0.0`**
  */
-function request(text, options) {
-    ACL.log(`FROM flaggedapi.cussCheck.request(); This is counted as OUTDATED! A new system needs to be created. Expect errors...`, { type: `error`})
-    if (!options) { options = {} }
-    return new Promise(function (resolve, reject) {
-        Handler(() => {
-            if (!HandleStorage.r || HandleStorage.r.statusCode === 404) return;
-            //if (typeof (options) != "object") return ACL.ACD(`Please pass an Object of options, example: { refresh: true }`, `error`);
-            //if (options.refresh) QueueList();
-            else {
-                if (!env.preload_cussList) QueueList();
-                else run(null, env.preload_cussList);
-            };
-            function QueueList() {
-                Handler();
-                setTimeout(function () {
-                    const list = JSON.parse(HandleStorage.b);
-                    env.preload_cussList = list;
-                    run(null, list);
-                }, 500);
-            };
-        });
-        function run(error, list) {
-            let err = [];
-            if (!error) {
-                const found_cuss = [];
-                if (typeof (text) != 'string') err;
-                for (let index = 0; index < list.length; index++) {
-                    const element = list[index].toLowerCase();
-                    if ((options.ignored_words ? !options.ignored_words.includes(element) : true) && text.toLowerCase().includes(element)) found_cuss.push(element);
-                };
-                let data = { hasCuss: found_cuss.length > 0 ? true : false, cuss_list: found_cuss };
-                if (err.length === 0) err = null;
-                resolve(data);
-            } else reject({ error: true});
-        };
-    })
-};
+function check(searchString, options) {
+    return new Promise((res, rej) => {
+        fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => {
+            let found_cuss = { number_of_words: 0, words: [] };
+            searchString = searchString.toLowerCase();
+            if (options && options.custom_words) options.custom_words.forEach((item, index, array) => { data.push({ cussword: item.toLowerCase(), level: 1, origin: `custom`}); });
+            data.forEach((item, index, array) => {
+                if (index == array.length - 1) res(found_cuss);
+                if (options && options.level < item.level) return;
+                if (options && options.ignored_words && options.ignored_words.find(x => x === item.cussword)) return;
+                if (searchString.includes(item.cussword)) { found_cuss.number_of_words++; found_cuss.words.push(item); }
+            });
+        })
+    });
+}
+
 /**
  * ***Cuss List***  \
- * Returns the full list of words
- * @param {Boolean} Array **If `true` it returns the list as an array, if `false` it will print to the console**
- * @param {Array} returned **The array that is returned**  
- * \
- * ***`Code Examples`***  \
- * Use the returned method to get the array value\
- * Example:
+ * returns all of the cuss words that are registered in the API
+ *
+ * *Recommended* Example:
  * ```js
  * //Call the API
- * const { list } = require("flaggedapi").cussCheck
- * 
- * 
- * //Use the list()
- * list(true, returned => {
- *     console.log(returned); //=> ["Bad", "words"]
- * });
- *     
- * //Use without the returned method to get a message in the console
- * //Example:
- * list(); //=> (!) ["Bad", "words"]
+ * const { list } = require("flaggedapi")
+ *
+ * //Use list()
+ * list().then(data => {
+ *  console.log(data); //=>
+ *  //[
+ *  // { 
+ *  //   cussword: 'frick',
+ *  //   language: 'english',
+ *  //   level: 4,
+ *  //   reference: 'https://www.urbandictionary.com/define.php?term=Frick',
+ *  //   origin: 'api'
+ *  // },
+ *  // { 
+ *  //   cussword: 'badword',
+ *  //   language: 'english',
+ *  //   level: 4,
+ *  //   reference: 'https://www.someurl.com/',
+ *  //   origin: 'api'
+ *  // }]
+ * })
  * ```
  * 
- * @see https://api.theflagen430297.com/flaggedAPIHome#CussList
+ * @returns {Array}
+ * @since **`3.0.0`**
  */
-function list(Array, returned) {
-    Handler(() => {
-        let array = HandleStorage.b.replace(/\[|\]/g, "").replace(/\"/g, "").split(/,/g);
-        if (!Array) return ACL.log(HandleStorage.b);
-        else return returned(array);
-    });
-};
-/**
- * ***Number of blocked Words***  \
- * Returns the number of cuss words
- * 
- * @param returned **If `returned` is used, it returns an Integer, else it will print to the console**  
- * \
- * ***`Code Examples`***  \
- * Use the returned method to get the Integer value\
- * Example:
- * ```js
- * //Call the API
- * const { number } = require("flaggedapi").cussCheck
- * 
- * 
- * //Use the list()
- * number(returned => {
- *     console.log(returned); //=> 183
- * });
- *     
- * //Use without the returned method to get a message in the console
- * //Example:
- * number(); //=> There are 183 words in the database, if you would like to contribute and add more words you can summit your words at https://join.theflagen430297.com/discord
- * ```
- * 
- * @see https://api.theflagen430297.com/flaggedAPIHome#CussNumber
- */
-function number(returned) {
-    let num = 0, array;
-    Handler(() => { getNumber(); });
-    function getNumber() {
-        array = HandleStorage.b.replace(/\[|\]/g, "").replace(/\"/g, "").split(/,/g);
-        array.forEach(x => { num++ }); i();
-        function i() {
-            if (num === array.length) {
-                if (!returned) return ACL.log(`There are ${num} words in the database, if you would like to contribute and add more words you can summit your words at https://join.theflagen430297.com/discord`);
-                else return returned(num);
-            } else setTimeout(() => { i() }, 50);
-        };
-    };
-};
-function Handler(code) {
-    let time = new Date();
-    requestURL.get('https://api.theflagen430297.com/flaggedAPI/src/cussing/list.txt', function (e, r, b) {
-        HandleStorage.e = e; HandleStorage.r = r; HandleStorage.b = b;
-        if (!b && !r) return console.log(`Check your internet connection, if this keeps happening please report it at https://join.theflagen430297.com/discord\n\nErrorCode:\n${e}`);
-        else if (!b && r) return Returned_Data(`A connection to the server was made but the server did not send any data, please report this at https://join.theflagen430297.com/discord`);
-        else if (r.statusCode === 404) return ACL.log(`The resource that is required could not be found.\nReinstall the package and try again.\nIf that doesn't work please report it at https://join.theflagen430297.com/discord\n\nPackage Version: ${Package.version}\nTime: ${time}\n`, true, `error`);
-        else setTimeout(function () {
-            try {
-                code()
-            } catch (e) {
-                code
-            }
-        }, 500);
-    });
-};
-module.exports = { request, list, number };
+function list() { return new Promise((res, rej) => { fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => { res(data);}) }) }
+
+module.exports = { check, list };

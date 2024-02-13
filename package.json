@@ -1,10 +1,10 @@
 {
   "name": "flaggedapi",
   "author": "TheFlagen430297",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "This is an Anti-cusser, a cool logging system and an all around API for all things TheFlagen430297",
   "license": "FCL",
-  "main": "exports.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,10 +19,9 @@
   ],
   "dependencies": {
     "chalk": "^4.1.2",
-    "request": "^2.88.2",
     "strip-ansi": "^6.0.1"
   },
-  "homepage": "https://theflagen430297.com/API/FlaggedAPI/Home",
+  "homepage": "https://github.com/TheFlagen430297/FlaggedAPI",
   "repository": {
     "type": "git",
     "url": "https://github.com/TheFlagen430297/FlaggedAPI.git"
