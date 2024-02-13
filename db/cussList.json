@@ -3,12 +3,21 @@
         "cussword": "fuck",
         "language": "english",
         "level": 1,
-        "reference": "https://en.wikipedia.org/wiki/Fuck"
+        "reference": "https://en.wikipedia.org/wiki/Fuck",
+        "origin": "api"
     },
     {
         "cussword": "shit",
         "language": "english",
         "level": 1,
-        "reference": "https://en.wikipedia.org/wiki/Shit"
+        "reference": "https://en.wikipedia.org/wiki/Shit",
+        "origin": "api"
+    },
+    {
+        "cussword": "frick",
+        "language": "english",
+        "level": 4,
+        "reference": "https://www.urbandictionary.com/define.php?term=Frick",
+        "origin": "api"
     }
 ]
