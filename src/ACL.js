@@ -182,7 +182,7 @@ function colors(...options) {
  * A 6-digit Hex string along with the # "***`#FFFFFF`***". It changes the color of the text.
  * @param {"success"|"info"|"warning"|"error"} [options.type] *ₒₚₜᵢₒₙₐₗ* ***`type`***  \
  * The type of message that you want to use.
- * @returns {void|String} When used with option ***`returnRaw`*** set to `true` it will return a [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), else it will apply the passed options and log the given string to the console
+ * @returns {void|Promise|String} When used with option ***`returnRaw`*** set to `true` it will return a [chalk processed string](https://www.npmjs.com/package/chalk/v/4.1.2 "Chalk 4.1.2 needs to be installed for the raw string to work"), else it will apply the passed options and log the given string to the console
  * @updated **`3.0.0`**
  */
 function log(text, options) {
@@ -200,8 +200,9 @@ function log(text, options) {
     });
     if (text && !options) return executeLog(false, Prefix, `chalk.hex("${Settings.Text_Color_Main.color}")(\`${text}\`)`);
     if (options.type) {
-        if (options.type != `success` && options.type != `info` && options.type != `warning` && options.type != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, options, true)
-        else SpecialType(options.type.toLowerCase(), text, options, true)
+        if (options.type.toLowerCase() != `success` && options.type.toLowerCase() != `info` && options.type.toLowerCase() != `warning` && options.type.toLowerCase() != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, options, true)
+        if (options.returnRaw) return SpecialType(options.type.toLowerCase(), text, options, true).then(data => { return data; });
+        else SpecialType(options.type.toLowerCase(), text, options, true);
     } else {
         if (options.returnRaw) return `chalk.hex("${Settings.Tertiary_Color.color}").bold("(") + chalk.hex("${Settings.Main_Color.color}").bold("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold(") ") + chalk.hex("${options.color ? options.color : Settings.Text_Color_Main.color}")${options.bold ? ".bold" : ""}${options.italic ? ".italic" : ""}${options.underline ? ".underline" : ""}("${text}")`;
         else executeLog(false, Prefix, `chalk.hex("${options.color ? options.color : Settings.Text_Color_Main.color}")${options.bold ? `.bold` : ``}${options.italic ? `.italic` : ``}${options.underline ? `.underline` : ``}(\`${text}\`)`);
@@ -271,8 +272,8 @@ function supported(boolean) {
 }
 
 function SpecialType(type, text, options, ACD) {
-    executeLog(options.returnRaw, undefined, `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${ACD ? Settings[type].color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") + chalk.hex("${Settings[type].color}").italic.bold("${capitalizeFirstLetter(type)}: ") +
-    chalk.hex("${options.color ? options.color : ACD ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}")${options.bold ? `.bold` : ``}${options.italic ? `.italic` : ``}${options.underline ? `.underline` : ``}(\`${text}\`)`);
+    if (options.returnRaw) return new Promise((res, rej) => { res(executeLog(options.returnRaw, undefined, `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${ACD ? Settings[type].color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") + chalk.hex("${Settings[type].color}").italic.bold("${capitalizeFirstLetter(type)}: ") + chalk.hex("${options.color ? options.color : ACD ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}")${options.bold ? `.bold` : ``}${options.italic ? `.italic` : ``}${options.underline ? `.underline` : ``}(\`${text}\`)`)); });
+    else executeLog(options.returnRaw, undefined, `chalk.hex("${Settings.Tertiary_Color.color}").bold.italic("(") + chalk.hex("${ACD ? Settings[type].color : Settings.Secondary_Color.color}").bold.italic("!") + chalk.hex("${Settings.Tertiary_Color.color}").bold.italic(") ") + chalk.hex("${Settings[type].color}").italic.bold("${capitalizeFirstLetter(type)}: ") + chalk.hex("${options.color ? options.color : ACD ? Settings.Text_Color_Main.color : Settings.Text_Color_Debug.color}")${options.bold ? `.bold` : ``}${options.italic ? `.italic` : ``}${options.underline ? `.underline` : ``}(\`${text}\`)`);
 }
 
 function executeLog(returnRaw, prefix, string) {
