@@ -16,9 +16,9 @@ It includes a description, and code inside of it :D 100% Help in the function it
 <br>
 <br>
 <br>
-<h1>3.0.0 Update</h1>
-Holy Cow, I had no idea how to code back then XD
-<br>The code has been fixed, multiple features have been added, and should work as intended.
+<h1>3.0.1 Update</h1>
+Fixed a bug where in log() where if "returnRaw: true" and "type" was added it would return undefined
+<br>
 <br>
 <br>
 <br><i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
@@ -119,9 +119,6 @@ log(`Test`, { color: "#FF0000", type: "info" }); //=> (!) Info: Test
 //*The text will be Red, and it will append "Info:"*
 //The Info color will be what you have set it in colors()
 
-log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
-//*It will return the raw chalk format for processing*
-
 log(`Test`, { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" }); //=> chalk.hex(#424742).bold(` (`) + chalk.hex(#047ffa).bold(`!`) + chalk.hex(#424742).bold(`) `) + chalk.hex(`#FF0000`).bold.italic.underline("Test")
 //*It will return the raw chalk format for processing*
 //This is a string value that you will need to have processed, it will not log.
@@ -130,6 +127,9 @@ log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color
 //*It will be Bold, Italic, Underlined, and the text will be Red*
 //It will log to the console.
 //In this case, all of these options are optional.
+
+log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }).then(data => console.log(data)); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+//*It will return the raw chalk format for processing*
 ```
 <details>
     <summary><h2>No Notes Version</h2></summary>
@@ -143,9 +143,9 @@ log(`Test`);
 log({ Some: `Object`});
 log(`Logging with\nmore then\n\none line!`);
 log(`Test`, { color: "#FF0000", type: "info" });
-log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" });
 log(`Test`, { returnRaw: true, bold: true, italic: true, underline: true, color: "#FF0000" });
 log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color: "#FF0000" });
+log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }).then(data => console.log(data));
 ```
 </details>
 <br>
@@ -364,6 +364,15 @@ list().then(data => {
     <br>• Updated package.json
     <br>• Updated package-lock.json
     <br>• Removed "request" package
+    <br>• Edited README.md
+</details>
+<details>
+    <summary><p>3.0.0 -> 3.0.1 Changelog</p></summary>
+    <br>• Updated src/cussCheck.js
+    <br>• Changed API links from dev branch to main branch
+    <br>• Updated src/ACL.js
+    <br>• Fixed bug where in log() where if "returnRaw: true" and "type" was added it would return undefined. Now it will be a Promise when returnRaw is true
+    <br>• Updated package.json
     <br>• Edited README.md
 </details>
 <br>
