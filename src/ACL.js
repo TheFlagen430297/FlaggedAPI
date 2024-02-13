@@ -288,11 +288,5 @@ function capitalizeFirstLetter(string) {
 module.exports = {
     //It is highly recommend to use the most recent function assignments
     //the most recent function assignments
-    ACD, ACDClear, colors, log, ACDToggle, supported, chalk,
-
-    //For everyone who hates to update their code, the old function assignments still work :D
-    //Legacy function assignments
-    Log: log,
-    Colors: colors,
-    clear: ACDClear
+    ACD, ACDClear, colors, log, ACDToggle, supported, chalk, colors, clear: ACDClear
 };

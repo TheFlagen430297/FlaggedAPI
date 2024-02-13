@@ -203,6 +203,7 @@ list().then(data => {
 <br>
 <br>
 <br>
+<h1>All Changelogs</h1>
 <details>
     <summary><p>1.0.0 -> 1.1.1 Changelog</p></summary>
     • Added "README.md".
