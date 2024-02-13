@@ -165,7 +165,7 @@ function colors(...options) {
  *      //*The text will be Red, and it will append "Info:"*
  *      //The Info color will be what you have set it in colors()
  * 
- *      log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
+ *      log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }).then(data => console.log(data)); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
  *      //*It will return the raw chalk format for processing*
  * ```
  * 
