@@ -1,35 +1,46 @@
 const kp = require(`keypress`);
 const fs = require(`fs`);
 const { join } = require(`path`);
-const { log, chalk, clear } = require(`./ACL`);
+const { log, chalk } = require(`./ACL`);
 const logU = require(`log-update`);
 
 
 /**
  * ***Console Control***
- * 
  * Allows input to the console and add commands to it
- * @param {String} dir Use `__dirname` that directs to the root of the project
- * @param {Object} imports Any imports you want to pass to the command files
+ * 
+ * *Recommended Examples:*
+ * 
+ * ```javascript
+ * let nerd = `nerd`;
+ * consoleControl(__dirname, (returnedData) => {
+ *     console.log(returnedData); //=> { command: "name", state: "success", data: "response" }
+ * }, () => { return { nerd, var2: "value2" } });
+ * ```
+ * 
+ * @param {String} directory Use `__dirname` that directs to the root of the project
+ * @param {Function} callback The response from the command. It returns an object with the command name, state, and data  \
+ * returns `{ command: "name", state: "success/failed", data: "response" }`
+ * @param {Function} import_function The import of the project variables to be used in the commands  \
+ * `() => { return { var1: "value1", var2: "value2" } }`
  * @since **`3.1.0`**
- * @updated **`3.2.0`**
+ * @updated **`3.3.0`**
  */
-function consoleControl(dir, imports) {
-    fs.stat(join(dir, 'src/console/commands'), (err, stats) => { 
-        if (err) {
-            fs.mkdir(join(dir, 'src'), (err) => { 
+function consoleControl(directory, callback, import_function) {
+    fs.stat(join(directory, 'src/console/commands'), (err, stats) => { 
+        if (err) fs.mkdir(join(directory, 'src'), (err) => { 
                 if (err) return log(err, { type: `error` });
-                fs.mkdir(join(dir, 'src/console'), (err) => {
+                fs.mkdir(join(directory, 'src/console'), (err) => {
                     if (err) return log(err, { type: `error` });
-                    fs.mkdir(join(dir, 'src/console/commands'), (err) => {
+                    fs.mkdir(join(directory, 'src/console/commands'), (err) => {
                         if (err) return log(err, { type: `error` });
-                        fs.writeFile(join(dir, 'src/console/commands/test.js'), `module.exports = {\n    name: "test",\n    description: "just a test",\n    usage: "",\n    execute({ log }, args) {\n        return new Promise((res, rej) => {\n            console.log("just a test");\n            res();\n        });\n    }\n};`, (err) => {
-                            fs.writeFile(join(dir, 'src/console/commands/help.js'), `module.exports = {\n    name: "help",\n    description: "shows all commands",\n    usage: "<command>",\n    execute({ log, xEnvs}, args) {\n        return new Promise((res, rej) => {\n            let returnString = "Commands:";\n            if (args[0]) {\n                let info = require(\`./\${args[0]}\`);\n                returnString = \`\${info.name}\${info.usage ? " " + info.usage : ""}: \${info.description}\`;\n                log(returnString, { color: "#FFFFFF"});\n                return res();\n            } else xEnvs.console.commands.files.forEach((file, index, array) => {\n                let info = require(\`./\${file}\`);\n                returnString = returnString + \`\\n\${info.name}\${info.usage ? " " + info.usage : ""}: \${info.description}\`;\n                if (index === array.length - 1) {\n                    log(returnString, { color: "#FFFFFF"});\n                    res();\n                }\n            });\n        });\n    }\n};`, (err) => { run(); });
+                        fs.writeFile(join(directory, 'src/console/commands/test.js'), `module.exports = {\n    name: "test",\n    description: "just a test",\n    usage: "",\n    execute({ log }, args) {\n        return new Promise((res, rej) => {\n            console.log("just a test");\n            res();\n        });\n    }\n};`, (err) => {
+                            fs.writeFile(join(directory, 'src/console/commands/help.js'), `module.exports = {\n    name: "help",\n    description: "shows all commands",\n    usage: "<command>",\n    execute({ log, xEnvs}, args) {\n        return new Promise((res, rej) => {\n            let returnString = "Commands:";\n            if (args[0]) {\n                let info = require(\`./\${args[0]}\`);\n                returnString = \`\${info.name}\${info.usage ? " " + info.usage : ""}: \${info.description}\`;\n                log(returnString, { color: "#FFFFFF"});\n                return res();\n            } else xEnvs.console.commands.files.forEach((file, index, array) => {\n                let info = require(\`./\${file}\`);\n                returnString = returnString + \`\\n\${info.name}\${info.usage ? " " + info.usage : ""}: \${info.description}\`;\n                if (index === array.length - 1) {\n                    log(returnString, { color: "#FFFFFF"});\n                    res();\n                }\n            });\n        });\n    }\n};`, (err) => { run(); });
                         });
                     });
                 });
             });
-        } else run();
+        else run();
     });
 
     function run() {
@@ -47,8 +58,8 @@ function consoleControl(dir, imports) {
                     else logU(eval(log(chalk.hex("#FF3333")(command + str) + (xEnvs.console.blinking ? `|` : ``), { returnRaw: true })));
                 }, 200),
                 commands: {
-                    path: join(dir, 'src/console/commands'),
-                    files: fs.readdirSync(join(dir, 'src/console/commands')).filter(file => file.endsWith('.js'))
+                    path: join(directory, 'src/console/commands'),
+                    files: fs.readdirSync(join(directory, 'src/console/commands')).filter(file => file.endsWith('.js'))
                 },
                 commandHistory: {
                     currentNum: 0,
@@ -61,9 +72,9 @@ function consoleControl(dir, imports) {
                 paused: false
             }
         };
-    
-    
+
         process.stdin.on('keypress', function (ch, key) {
+            if (key && key.name == `escape`) { xEnvs.console.commandHistory.currentNum = xEnvs.console.commandHistory.past.length; xEnvs.console.currentString = ``; }
             if (key && key.ctrl && key.name == `c`) {
                 clearInterval(xEnvs.console.blinkingInterval);
                 log(`The app has stopped`, { returnRaw: true, type: `warning`, color: `#FFFFFF` }).then(data => logU(eval(data)));
@@ -96,7 +107,6 @@ function consoleControl(dir, imports) {
                     xEnvs.console.commandHistory.past = [];
                     xEnvs.console.commandHistory.currentNum = 0;
                     log(`Cleared the console's past`, { returnRaw: true, type: `success` }).then(data => logU(eval(data)));
-                    log();
                     xEnvs.console.currentString = ``;
                 }
             } else {
@@ -110,7 +120,7 @@ function consoleControl(dir, imports) {
                     let str = args.length == 0 ? `` : ` ${args.join(`,`).replace(/,/g, ` `)}`;
                     if (xEnvs.console.commands.files.includes(`${command}.js`)) logU(eval(log(chalk.hex("#4eeeee")(command) + str, { returnRaw: true })));
                     else logU(eval(log(chalk.hex("#FF3333")(command + str), { returnRaw: true })));
-                    call({ platform: `console`, call: `command` }, command, args);
+                    call({ platform: `console`, call: `command` }, command);
                 } else if (key.name == `backspace`) editString({ type: `bs`, info: null });
                 else editString({ type: `add`, info: key.sequence });
             }
@@ -130,37 +140,11 @@ function consoleControl(dir, imports) {
                 if (xEnvs.console.commands.files.includes(`${command}.js`)) logU(eval(log(chalk.hex("#4eeeee")(command) + str + (xEnvs.console.blinking ? `|` : ``), { returnRaw: true })));
                 else logU(eval(log(chalk.hex("#FF3333")(command + str) + (xEnvs.console.blinking ? `|` : ``), { returnRaw: true })));
             }
-    
-            if (key && key.name == `escape`) { xEnvs.console.commandHistory.currentNum = xEnvs.console.commandHistory.past.length; xEnvs.console.currentString = ``; }
         });
         process.stdin.setRawMode(true);
         process.stdin.resume();
         kp(process.stdin);
         xEnvs.console.prompted = true;
-    
-        function call(type, name, args) {
-            if (type.platform == `console`) {
-                let args = xEnvs.console.currentString.split(` `);
-                let command = args.shift();
-                let str = args.length == 0 ? `` : ` ${args.join(`,`).replace(/,/g, ` `)}`;
-                if (xEnvs.console.commands.files.includes(`${command}.js`)) log(chalk.hex("#4eeeee")(command) + str);
-                else log(chalk.hex("#FF3333")(command + str));
-                
-                xEnvs.console.commands.files = fs.readdirSync(join(dir, 'src/console/commands')).filter(file => file.endsWith('.js'));
-                xEnvs.console.currentString = ``;
-                if (type.call == `command`) {
-                    if (xEnvs.console.commands.files.includes(`${name}.js`)) {
-                        const filePath = join(xEnvs.console.commands.path, `${name}.js`);
-                        const event = require(filePath);
-                        event.execute(Object.assign({}, { log, xEnvs }, imports), args)
-                        .then(() => { xEnvs.console.prompted = true; })
-                        .catch(err => { log(err, { type: `error` }); xEnvs.console.prompted = true; });
-                        delete require.cache[require.resolve(filePath)];
-                    } else { log(`Unknown Command: ${name}`, { type: `error` }); xEnvs.console.prompted = true; }
-                }
-            }
-        }
-
         const originalLog = console.log;
         console.log = function() {
             let args = Array.from(arguments);
@@ -170,6 +154,29 @@ function consoleControl(dir, imports) {
             originalLog.apply(console, args);
             xEnvs.console.prompted = true;
         };
-    }
+
+        function call(type, name) {
+            if (type.platform == `console`) {
+                let args = xEnvs.console.currentString.split(` `);
+                let command = args.shift();
+                let str = args.length == 0 ? `` : ` ${args.join(`,`).replace(/,/g, ` `)}`;
+                if (xEnvs.console.commands.files.includes(`${command}.js`)) log(chalk.hex("#4eeeee")(command) + str);
+                else log(chalk.hex("#FF3333")(command + str));
+                xEnvs.console.commands.files = fs.readdirSync(join(directory, 'src/console/commands')).filter(file => file.endsWith('.js'));
+                xEnvs.console.currentString = ``;
+                if (type.call == `command`) {
+                    if (xEnvs.console.commands.files.includes(`${name}.js`)) {
+                        const filePath = join(xEnvs.console.commands.path, `${name}.js`);
+                        const event = require(filePath);
+                        event.execute(Object.assign({}, { log, xEnvs }, import_function()), args)
+                            .then(resData => { callback({ command: name, state: `success`, data: resData}); })
+                            .catch(err => { callback({ command: name, state: `failed`, data: err}); })
+                            .finally(() => { xEnvs.console.prompted = true; });
+                        delete require.cache[require.resolve(filePath)];
+                    } else { log(`Unknown Command: ${name}`, { type: `error` }); xEnvs.console.prompted = true; }
+                }
+            }
+        }
+    };
 }
 module.exports = { consoleControl };

@@ -49,12 +49,12 @@ let Settings = {
  * @updated **`3.0.0`**
  */
 function ACD(text, type) {
-    if (!Settings.ACDEnabled) return
+    if (!Settings.ACDEnabled) return;
     if (type) {
         let typel = type.toLowerCase();
-        if (typel != `success` && typel != `info` && typel != `warning` && typel != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, { returnRaw: false, color: false }, false)
-        else SpecialType(typel, text, { returnRaw: false, color: false }, false)
-    } else SpecialType(`info`, text, { returnRaw: false, color: false }, false)
+        if (typel != `success` && typel != `info` && typel != `warning` && typel != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, { returnRaw: false, color: false }, false);
+        else SpecialType(typel, text, { returnRaw: false, color: false }, false);
+    } else SpecialType(`info`, text, { returnRaw: false, color: false }, false);
 }
 
 /**
@@ -188,7 +188,7 @@ function colors(...options) {
 function log(text, options) {
     let Prefix = chalk.hex(Settings.Tertiary_Color.color).bold(`(`) + chalk.hex(Settings.Main_Color.color).bold(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold(`)`);
     if (!options && !text) return console.log(``);
-    if (typeof(text) != `string`) return console.log(Prefix, text)
+    if (typeof(text) != `string`) return console.log(Prefix, text);
     let parts = text.split(`\n`);
     text = "";
     parts.forEach((x, i) => {
@@ -200,7 +200,7 @@ function log(text, options) {
     });
     if (text && !options) return executeLog(false, Prefix, `chalk.hex("${Settings.Text_Color_Main.color}")(\`${text}\`)`);
     if (options.type) {
-        if (options.type.toLowerCase() != `success` && options.type.toLowerCase() != `info` && options.type.toLowerCase() != `warning` && options.type.toLowerCase() != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, options, true)
+        if (options.type.toLowerCase() != `success` && options.type.toLowerCase() != `info` && options.type.toLowerCase() != `warning` && options.type.toLowerCase() != `error`) return SpecialType(`error`, `Expected either "success", "info", "warning", or "error" but got ->${chalk.hex(Settings.error.color)(options.type)}<-\n${chalk.hex(Settings.Tertiary_Color.color).bold.italic(`(`) + chalk.hex(Settings.Secondary_Color.color).bold.italic(`!`) + chalk.hex(Settings.Tertiary_Color.color).bold.italic(`) If you are not needing a type then it is recommend to remove it from the options.`)}`, options, true);
         if (options.returnRaw) return SpecialType(options.type.toLowerCase(), text, options, true).then(data => { return data; });
         else SpecialType(options.type.toLowerCase(), text, options, true);
     } else {
@@ -214,7 +214,6 @@ function log(text, options) {
  * If set to True it will display the set message in the console.  \
  * If not set it will toggle it's current state  \
  * **Default:** ***`false`***
- * @param {Boolean|Null} boolean 
  * 
  * ***NOTE:*** *This is a `in-memory` only option and needs to be set at every startup.*
  * 
@@ -232,12 +231,13 @@ function log(text, options) {
  * //Assign the desired value *(Must be Boolean)*
  * ACDToggle(true);
  * ```
+ * @param {Boolean} [boolean] 
  * @returns {void|throw} returns nothing, logs error
- * @updated **`3.0.0`**
+ * @updated **`3.3.0`**
  */
 function ACDToggle(boolean) {
     if (!boolean) return Settings.ACDEnabled = !Settings.ACDEnabled;
-    else if (typeof(boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false)
+    else if (typeof(boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false);
     else Settings.ACDEnabled = boolean;
 }
 
@@ -261,13 +261,13 @@ function ACDToggle(boolean) {
  * //Assign the desired value *(Must be Boolean)*
  * supported(true);
  * ```
- * @param {Boolean|Null} boolean
+ * @param {Boolean} [boolean]
  * @returns {void|throw} returns nothing, logs error
- * @updated **`3.0.0`**
+ * @updated **`3.3.0`**
  */
 function supported(boolean) {
     if (!boolean) return Settings.Supported_Console = !Settings.Supported_Console;
-    else if (typeof (boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false)
+    else if (typeof (boolean) != "boolean") return SpecialType(`error`, `It must be either true or false, but got ->${boolean}<-`, { returnRaw: false, color: false }, false);
     else Settings.Supported_Console = boolean;
 }
 
@@ -282,12 +282,6 @@ function executeLog(returnRaw, prefix, string) {
     console.log((prefix ? prefix + ` ` : ``) + eval(string));
 }
 
-function capitalizeFirstLetter(string) {
-    return string[0].toUpperCase() + string.slice(1);
-}
+function capitalizeFirstLetter(string) { return string[0].toUpperCase() + string.slice(1); }
 
-module.exports = {
-    //It is highly recommend to use the most recent function assignments
-    //the most recent function assignments
-    ACD, ACDClear, colors, log, ACDToggle, supported, chalk, colors, clear: ACDClear
-};
+module.exports = { ACD, ACDClear, colors, log, ACDToggle, supported, chalk, colors, clear: ACDClear };

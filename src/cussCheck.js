@@ -60,7 +60,7 @@ function check(searchString, options) {
                 if (options && options.ignored_words && options.ignored_words.find(x => x === item.cussword)) return;
                 if (searchString.includes(item.cussword)) { found_cuss.number_of_words++; found_cuss.words.push(item); }
             });
-        })
+        });
     });
 }
 
@@ -97,6 +97,6 @@ function check(searchString, options) {
  * @returns {Array}
  * @since **`3.0.0`**
  */
-function list() { return new Promise((res, rej) => { fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => { res(data);}) }) }
+function list() { return new Promise((res, rej) => { fetch(`https://raw.githubusercontent.com/TheFlagen430297/FlaggedAPI/dev/db/cussList.json`).then(response => response.json()).then(data => { res(data);}); }); }
 
 module.exports = { check, list };
