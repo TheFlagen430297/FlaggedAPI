@@ -16,8 +16,8 @@ It includes a description, and code inside of it :D 100% Help in the function it
 <br>
 <br>
 <br>
-<h1>3.0.1 Update</h1>
-Fixed a bug where in log() where if "returnRaw: true" and "type" was added it would return undefined
+<h1>3.2.0 Update</h1>
+Better coded consoleControl(); and updated the README.md file *(Sorry)*
 <br>
 <br>
 <br>
@@ -42,7 +42,7 @@ Fixed a bug where in log() where if "returnRaw: true" and "type" was added it wo
 //These are used to call and create the shortcut calls of the API.
 
 //Calling the API.
-const { ACD, ACDClear, ACDToggle, chalk, check, clear, colors, list, log, supported } = require("flaggedapi");
+const { ACD, ACDClear, ACDToggle, chalk, check, clear, colors, list, log, supported, consoleControl } = require("flaggedapi");
 
 //Now all you have to use is:
 //• ACD();
@@ -168,6 +168,31 @@ ACD("You are reading the README.md help file!", "success");//=> (!) Success: You
 ACD("You are reading the README.md help file!", "success");
 ```
 </details>
+<br>
+<br>
+<br>
+<h1>Console Control</h1>
+<p>Now you can control the console and add your own custom commands to it!</p>
+
+```js
+//Any packages or variables that you have in your code
+const somepkg = require(`somepkg`);
+let somestr = `This is an example`;
+
+//Calling the function will make FlaggedAPI take over the console.
+//IMPORTANT! You MUST pass the root dir path into the function, if you call the function from another file, you must pass the root dir.
+consoleControl(__dirname, { somepkg, somestr });
+```
+<details>
+    <summary><h2>No Notes Version</h2></summary>
+
+```js
+const somepkg = require(`somepkg`);
+let somestr = `This is an example`;
+consoleControl(__dirname, { somepkg, somestr });
+```
+</details>
+<br>
 <br>
 <br>
 <h1>Cuss Check ✅</h1>
@@ -372,6 +397,21 @@ list().then(data => {
     <br>• Changed API links from dev branch to main branch
     <br>• Updated src/ACL.js
     <br>• Fixed bug where in log() where if "returnRaw: true" and "type" was added it would return undefined. Now it will be a Promise when returnRaw is true
+    <br>• Updated package.json
+    <br>• Edited README.md
+</details>
+<details>
+    <summary><p>3.0.0 -> 3.1.0 Changelog</p></summary>
+    <br>• Added src/consoleControl.js 
+    <br>• consoleControl(); allows you input to the console and you can create commands for it 
+    <br>• Updated package.json
+    <br>• Forgot to edit README.md
+</details>
+<details>
+    <summary><p>3.1.0 -> 3.2.0 Changelog</p></summary>
+    <br>• Updated src/consoleControl.js
+    <br>• Full documentation for consoleControl();
+    <br>• Better coding of consoleControl(); to make it look nicer and run better.
     <br>• Updated package.json
     <br>• Edited README.md
 </details>
