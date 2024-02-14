@@ -1,7 +1,7 @@
 {
   "name": "flaggedapi",
   "author": "TheFlagen430297",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "This is an Anti-cusser, a cool logging system and an all around API for all things TheFlagen430297",
   "license": "FCL",
   "main": "index.js",
@@ -15,7 +15,9 @@
     "Flagen",
     "logging",
     "logger",
-    "cool-logging"
+    "cool-logging",
+    "console_control",
+    "console_commands"
   ],
   "dependencies": {
     "chalk": "^4.1.2",
