@@ -415,6 +415,17 @@ list().then(data => {
     <br>• Updated package.json
     <br>• Edited README.md
 </details>
+<details>
+    <summary><p>3.2.0 -> 3.2.1 Changelog</p></summary>
+    <br>• Updated package.json
+    <br>• Added new key words
+    <br>• Forgot to edit README.md
+</details>
+<details>
+    <summary><p>3.2.1 -> 3.2.2 Changelog</p></summary>
+    <br>• Updated package.json
+    <br>• Edited README.md
+</details>
 <br>
 <br>
 <br>
