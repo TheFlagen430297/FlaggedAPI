@@ -1,30 +1,18 @@
 <h1>FlaggedAPI</h1>
-<h1>Installation 💾</h1>
 <img src="https://minecraftskinstealer.com/achievement/2/npm+install+flaggedapi/Install+now%21">
 <br><a href="https://discord.gg/b9ax4KJ"><img class="aboutmeIMG" src="https://nodei.co/npm/flaggedapi.png?downloads=true&downloadRank=true&stars=true"></a>
-<br>
-<br>
-<br>
 <h1>What is FlaggedAPI? 🤷‍♂️</h1>
 <p><b>FlaggedAPI is a All-In-One API to connect to most of my services :D</b><br>It is a small API right now & only has an cuss checker and a logging system.<br>but it will receive updates whenever I can get around to it 😃
 <br>
 All functions should have JSDoc! It's when you hover over a function in VSCode and it gives you information about it :D
 It includes a description, and code inside of it :D 100% Help in the function itself XD</p>
-<br>
-<br><h2>Important Announcements!</h2>
-<br><p>Major version 3.0.0 completely changes how the code works and how it is written! You will have to update your code.</p>
-<br>
-<br>
-<br>
-<h1>3.2.0 Update</h1>
-Better coded consoleControl(); and updated the README.md file *(Sorry)*
-<br>
+<h2>Important Announcements!</h2>
+<p>Major version 3.0.0 completely changes how the code works and how it is written! You will have to update your code.</p>
+<h1>3.3.0 Update</h1>
+consoleControl(); was rewritten and now returns data from the command files.
 <br>
 <br>
 <br><i>Don't forget that all the documentation is found when hovering the functions in VSCode!</i>
-<br>
-<br>
-<br>
 <h1>Required and Recommended Settings</h1>
 <p>Here is what the requiring of the code looks like</p>    
 
@@ -73,8 +61,7 @@ colors([`Text_Color_Debug`, `#F0e0a0`], [`Main_Color`, `#FF0000`], [`Text_Color_
 //Lists the current color settings.
 colors();
 ```
-<details>
-    <summary><h2>No Notes Version</h2></summary>
+<details><summary>No Notes Version</summary>
 
 ```js
 const { ACD, ACDClear, ACDToggle, chalk, check, clear, colors, list, log, supported } = require("flaggedapi");
@@ -131,8 +118,7 @@ log(`Test`, { returnRaw: false, bold: true, italic: true, underline: true, color
 log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }).then(data => console.log(data)); //=> chalk.hex(#424742).bold.italic(` (`) + chalk.hex(#e3ca1c).bold.italic(`!`) + chalk.hex(#424742).bold.italic(`) `) + chalk.hex(#e3ca1c).italic.bold(`Info: `) + chalk.hex(#FF0000).italic(This is a test!)
 //*It will return the raw chalk format for processing*
 ```
-<details>
-    <summary><h2>No Notes Version</h2></summary>
+<details><summary>No Notes Version</summary>
 
 ```js
 ACDClear();
@@ -161,14 +147,12 @@ log(`Test`, { returnRaw: true, color: "#FF0000", type: "info" }).then(data => co
 //The "success" part can be one of four values: "success", "info", "warning", "error"
 ACD("You are reading the README.md help file!", "success");//=> (!) Success: You are reading the README.md help file!
 ```
-<details>
-    <summary><h2>No Notes Version</h2></summary>
+<details><summary>No Notes Version</summary>
 
 ```js
 ACD("You are reading the README.md help file!", "success");
 ```
 </details>
-<br>
 <br>
 <br>
 <h1>Console Control</h1>
@@ -181,18 +165,20 @@ let somestr = `This is an example`;
 
 //Calling the function will make FlaggedAPI take over the console.
 //IMPORTANT! You MUST pass the root dir path into the function, if you call the function from another file, you must pass the root dir.
-consoleControl(__dirname, { somepkg, somestr });
+consoleControl(__dirname, (returnedData => {
+    console.log(returnedData) //=> { command: 'test', state: 'success', data: `The data that was returned from the command file` }
+}), (() => { return { somesrt, somepkg}}));
 ```
-<details>
-    <summary><h2>No Notes Version</h2></summary>
+<details><summary>No Notes Version</summary>
 
 ```js
 const somepkg = require(`somepkg`);
 let somestr = `This is an example`;
-consoleControl(__dirname, { somepkg, somestr });
+consoleControl(__dirname, (returnedData => {
+    console.log(returnedData)
+}), (() => { return { somesrt, somepkg}}));
 ```
 </details>
-<br>
 <br>
 <br>
 <h1>Cuss Check ✅</h1>
@@ -217,36 +203,41 @@ check(`Doesn't matter, frick you nerd, you piece of crap`, { custom_words: [`ner
   //      { cussword: 'nerd', level: 1, origin: 'custom' }
   //    ]
   //}
-})
+});
 
-//Gives you a list of all the cuss words. (This is just for you to view the words in it's Array format. Use the method below to get the actual Array for processing)
+//Gives you the array of cuss words
 list().then(data => {
     console.log(data)
 })
 ```
+<details><summary>No Notes Version</summary>
+
+```js
+//Use check()
+check(`Doesn't matter, frick you nerd, you piece of crap`, { custom_words: [`nerd`], ignored_words: [`Words`, `You`, `Don't`, `Want`, `Checked`, `Crap`], level: 4 }).then(data => {
+  console.log(data);
+});
+list().then(data => {
+    console.log(data)
+})
+```
+</details>
 <br>
-<br>
-<br>
-<br>
-<h1>All Changelogs</h1>
-<details>
-    <summary><p>1.0.0 -> 1.1.1 Changelog</p></summary>
+<br><h1>All Changelogs</h1>
+<details> <summary>1.0.0 -> 1.1.1 Changelog</summary>
     • Added "README.md".
     <br>• Removed "test.js".
     <br>• Added better error messages to all events.
     <br>• Moved all script files to "src".
 </details>
-<details>
-    <summary><p>1.1.1 -> 1.1.4 Changelog</p></summary>
+<details> <summary>1.1.1 -> 1.1.4 Changelog</summary>
     • Edited: README.md
 </details>
-<details>
-    <summary><p>1.1.4 -> 1.1.5 Changelog</p></summary>
+<details> <summary>1.1.4 -> 1.1.5 Changelog</summary>
     • Added a new error on all events that makes the options required 
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.1.5 -> 1.2.0 Changelog</p></summary>
+<details> <summary>1.1.5 -> 1.2.0 Changelog</summary>
     Oh goodness where do I begin...
     <br>• Redid how the cussing system checks the given string
     <br>• Added ACL & ACD
@@ -257,9 +248,8 @@ list().then(data => {
     <br>• A lot more that I don't remember (I'll be better with the changelogs XD)
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.0 -> 1.2.1 Changelog</p></summary>
-    <br>• When you do not specify a type in ACD, it will choose Info as the default
+<details> <summary>1.2.0 -> 1.2.1 Changelog</summary>
+    • When you do not specify a type in ACD, it will choose Info as the default
     <br>• ACL.log() was redone and has better performance
     <br>• ACL.log() was given more options and better documentation
     <br>• ACL.log() now has an option to return the raw content
@@ -268,13 +258,11 @@ list().then(data => {
     <br>• Fixed the documentation in ACD where the function was called "log()" when you needed to use "ACD()". Again, I'm sorry XD
     <br>• Edited: README.md *(Better grammar too)*
 </details>
-<details>
-    <summary><p>1.2.1 -> 1.2.2 Changelog</p></summary>
-    <br>• Edited: README.md
+<details> <summary>1.2.1 -> 1.2.2 Changelog</summary>
+    • Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.2 -> 1.2.3 Changelog</p></summary>
-    <br> A special thanks to Ping for his help with this update!
+<details> <summary>1.2.2 -> 1.2.3 Changelog</summary>
+    A special thanks to Ping for his help with this update!
     <br>
     <br>• Fixed the hex bug when using returnRaw
     <br>• Deleted exports.js
@@ -285,36 +273,31 @@ list().then(data => {
     <br>• Edited: README.md
     <br>• Removed Herobrine... Wait what???
 </details>
-<details>
-    <summary><p>1.2.3 -> 1.2.4 Changelog</p></summary>
-    <br> A special thanks again to Ping for his help with this update!
+<details> <summary>1.2.3 -> 1.2.4 Changelog</summary>
+    A special thanks again to Ping for his help with this update!
     <br>
     <br>• Changed FlaggedAPI.cussCheck.request() from Callback to Promise!!
     <br>• Added request() to the Cuss Check documentation <i>(It's not like this whole thing is to block cusswords, and I totally forgot to add the main function... Nah bro your trippin)</i>
     <br>• Fixed FlaggedAPI.ACL.log() <i>(Wasn't working due to string & eval errors?)</i>
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.4 -> 1.2.5 Changelog</p></summary>
-    <br>• Updated LICENSE
+<details> <summary>1.2.4 -> 1.2.5 Changelog</summary>
+    • Updated LICENSE
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.5 -> 1.2.6 Changelog</p></summary>
-    <br>• Started Following the Semantic Versioning (To the best that I can)
+<details> <summary>1.2.5 -> 1.2.6 Changelog</summary>
+    • Started Following the Semantic Versioning (To the best that I can)
     <br>• Updated LICENSE
     <br>• Updated package.json
     <br>• Updated the README.md documentation
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.6 -> 1.2.7 Changelog</p></summary>
-    <br>• Updated package.json
+<details> <summary>1.2.6 -> 1.2.7 Changelog</summary>
+    • Updated package.json
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.7 -> 1.2.8 Changelog</p></summary>
-    <br>• FlaggedAPI.ACL.colors() was renamed to FlaggedAPI.ACL.Colors()
+<details> <summary>1.2.7 -> 1.2.8 Changelog</summary>
+    • FlaggedAPI.ACL.colors() was renamed to FlaggedAPI.ACL.Colors()
     <br>• FlaggedAPI.ACL.log() was renamed to FlaggedAPI.ACL.Log()
     <br>• Fixed FlaggedAPI.ACL.Colors() ACD error
     <br>• Code Improvements
@@ -322,13 +305,11 @@ list().then(data => {
     <br>• Updated FlaggedAPI.ACL.Colors() Documentation
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.8 -> 1.2.9 Changelog</p></summary>
-    <br>• Edited: README.md
+<details> <summary>1.2.8 -> 1.2.9 Changelog</summary>
+    • Edited: README.md
 </details>
-<details>
-    <summary><p>1.2.9 -> 1.3.0 Changelog</p></summary>
-    <br>• Updated log()! (it now has a New Line indicator!)
+<details> <summary>1.2.9 -> 1.3.0 Changelog</summary>
+    • Updated log()! (it now has a New Line indicator!)
     <br>• The space in front of the log() prefix was removed (IDK why I added that)
     <br>• Better Documentation (All the documentation was reviewed and updated!)
     <br>• Small code improvements (It doesn't change functionality, just how it's typed out lol)
@@ -337,32 +318,28 @@ list().then(data => {
     <br>• Updated package.json
     <br>• Edited: README.md (As always)
 </details>
-<details>
-    <summary><p>1.3.0 -> 1.3.1 Changelog</p></summary>
-    <br>• Fixed a bug where if you used log() with `returnRaw: ture` and `type: "error"` or `type: "warning"` it would say `(!) Info:` instead of `(!) Error:`
+<details> <summary>1.3.0 -> 1.3.1 Changelog</summary>
+    • Fixed a bug where if you used log() with `returnRaw: ture` and `type: "error"` or `type: "warning"` it would say `(!) Info:` instead of `(!) Error:`
     <br>• Updated src/ACL.js
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.3.1 -> 1.3.2 Changelog</p></summary>
-    <br>• Fixed a bug where if you used log() without any options it would throw an error
+<details> <summary>1.3.1 -> 1.3.2 Changelog</summary>
+    • Fixed a bug where if you used log() without any options it would throw an error
     <br>• Updated src/ACL.js
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.3.2 -> 1.4.0 Changelog</p></summary>
-    <br>• Added the ability to remove all colors from console messages (Mainly for unsupported consoles)
+<details> <summary>1.3.2 -> 1.4.0 Changelog</summary>
+    • Added the ability to remove all colors from console messages (Mainly for unsupported consoles)
     <br>• Added strip-ansi package
     <br>• Updated some more in-package documentation
     <br>• Updated src/ACL.js
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>1.4.0 -> 2.0.0 Changelog</p></summary>
-    <br>• Added .gitignore
+<details> <summary>1.4.0 -> 2.0.0 Changelog</summary>
+    • Added .gitignore
     <br>• Changed API links!
     <br>• Updated some more in-package documentation
     <br>• Updated src/cussCheck.js
@@ -370,9 +347,8 @@ list().then(data => {
     <br>• Updated package.json
     <br>• Edited: README.md
 </details>
-<details>
-    <summary><p>2.0.0 -> 3.0.0 Changelog</p></summary>
-    <br>• Edited .gitignore
+<details> <summary>2.0.0 -> 3.0.0 Changelog</summary>
+    • Edited .gitignore
     <br>• Added .npmignore
     <br>• Changed API links to github
     <br>• Revamped Documentation
@@ -391,45 +367,50 @@ list().then(data => {
     <br>• Removed "request" package
     <br>• Edited README.md
 </details>
-<details>
-    <summary><p>3.0.0 -> 3.0.1 Changelog</p></summary>
-    <br>• Updated src/cussCheck.js
+<details> <summary>3.0.0 -> 3.0.1 Changelog</summary>
+    • Updated src/cussCheck.js
     <br>• Changed API links from dev branch to main branch
     <br>• Updated src/ACL.js
     <br>• Fixed bug where in log() where if "returnRaw: true" and "type" was added it would return undefined. Now it will be a Promise when returnRaw is true
     <br>• Updated package.json
     <br>• Edited README.md
 </details>
-<details>
-    <summary><p>3.0.0 -> 3.1.0 Changelog</p></summary>
-    <br>• Added src/consoleControl.js 
+<details> <summary>3.0.0 -> 3.1.0 Changelog</summary>
+    • Added src/consoleControl.js 
     <br>• consoleControl(); allows you input to the console and you can create commands for it 
     <br>• Updated package.json
     <br>• Forgot to edit README.md
 </details>
-<details>
-    <summary><p>3.1.0 -> 3.2.0 Changelog</p></summary>
-    <br>• Updated src/consoleControl.js
+<details> <summary>3.1.0 -> 3.2.0 Changelog</summary>
+    • Updated src/consoleControl.js
     <br>• Full documentation for consoleControl();
     <br>• Better coding of consoleControl(); to make it look nicer and run better.
     <br>• Updated package.json
     <br>• Edited README.md
 </details>
-<details>
-    <summary><p>3.2.0 -> 3.2.1 Changelog</p></summary>
-    <br>• Updated package.json
+<details> <summary>3.2.0 -> 3.2.1 Changelog</summary>
+    • Updated package.json
     <br>• Added new key words
     <br>• Forgot to edit README.md
 </details>
 <details>
-    <summary><p>3.2.1 -> 3.2.2 Changelog</p></summary>
-    <br>• Updated package.json
+    <summary>3.2.1 -> 3.2.2 Changelog</summary>
+    • Updated package.json
     <br>• Edited README.md
 </details>
+<details> <summary>3.2.2 -> 3.3.0 Changelog</summary>
+    • Updated src/consoleControl.js
+    <br>• Updated src/ACL.js
+    <br>• Updated src/cussCheck.js
+    <br>• Updated index.js
+    <br>• Improved code formatting across all files
+    <br>• Changed how consoleControl() works and how it is written.
+    <br>• Updated package.json
+    <br>• Edited README.md
+    <br>• Fixed README formatting
+</details>
 <br>
-<br>
-<br>
-<h1>Support 🔧</h1>
+<br><h1>Support 🔧</h1>
 <p><b>I will give support over in my <a href="https://discord.gg/b9ax4KJ">Discord Server</a></b></p>
 <a href="https://discord.gg/b9ax4KJ"><img src="https://discordapp.com/api/guilds/698186167350329476/embed.png?style=banner2"></a>
 <br>
