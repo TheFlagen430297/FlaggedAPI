@@ -15,7 +15,9 @@
     "Flagen",
     "logging",
     "logger",
-    "cool-logging"
+    "cool-logging",
+    "console_control",
+    "console_commands"
   ],
   "dependencies": {
     "chalk": "^4.1.2",
